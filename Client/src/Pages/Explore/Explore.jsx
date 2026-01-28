@@ -46,8 +46,7 @@ const Explore = () => {
       setError(null);
       
       // Use credentials to send cookies
-      const response = await fetch(`http://localhost:5000/api/feed/explore?page=${pageNum}&limit=30`, {
-        method: 'GET',
+        const response = await fetch(`${import.meta.env.VITE_API}/api/feed/explore?page=${pageNum}&limit=30`, {
         credentials: 'include', // Important: sends cookies with request
         headers: {
           'Content-Type': 'application/json'
