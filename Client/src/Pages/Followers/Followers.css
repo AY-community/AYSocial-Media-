@@ -1,0 +1,167 @@
+/* ============================
+   FOLLOWERS PAGE SPECIFIC STYLES
+   ============================ */
+
+/* Header is outside follower-list */
+.followers-header {
+    width: 100%;
+    padding: 25px;
+    max-width: 2210px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.followers-header .followers-input-div {
+    width: 250px;
+    padding: 12px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-secondary);
+    background-color: var(--input-header-color);
+    border: var(--input-border-color) 1px solid;
+    display: flex;
+    align-items: center;
+}
+
+.followers-header .followers-input-div input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--text-primary-color);
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.followers-header .followers-search-icon {
+    color: var(--text-secondary-color);
+}
+
+.follower-list.content-section {
+    background-color: var(--third-color);
+    border-radius: var(--border-radius-primary);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    padding-top: 15px;
+    padding-bottom: 30px;
+    gap: 10px;
+    position: relative;
+}
+
+.follower-list .no-followers-text {
+    text-align: center;
+    color: var(--text-secondary-color);
+    font-size: 24px;
+}
+
+.follower-list .empty-follower-section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+}
+
+.follower-list .loading-spinner-initial {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    animation: spinnerRotateAbsolute 1s linear infinite;
+}
+
+/* Loading spinner for infinite scroll */
+.comment-loading-trigger {
+    width: 100%;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.comment-loading-trigger .loading-spinner {
+    animation: spinnerRotate 1s linear infinite;
+    transform-origin: center;
+}
+
+/* Rotation animation for regular spinners */
+@keyframes spinnerRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Rotation animation for absolute positioned spinners (keeps centered while rotating) */
+@keyframes spinnerRotateAbsolute {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.follower-list .suggested-users-header {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    position: relative;
+    width: fit-content;
+    font-weight: 600;
+    color: var(--text-primary-color);
+}
+
+.follower-list .suggested-users-header::after {
+    content: '';
+    position: absolute;
+    top: 120%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #8A2BE2, #4169E1);
+}
+
+.follower-list .suggested-users-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    min-height: 150px;
+    align-items: center;
+    width: 100%;
+}
+
+.follower-list .suggested-users-section p {
+    color: var(--text-secondary-color);
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 550px) {
+    .followers-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+        padding: 30px 15px;
+    }
+
+    .followers-header .followers-input-div {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .follower-list .empty-follower-section {
+        width: 100%;
+    }
+}

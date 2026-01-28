@@ -1,0 +1,29 @@
+.explore-shared-post-loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  grid-column: 2; /* This was in the inline style, seems important for the layout */
+}
+
+.explore-shared-post-spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #09f;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.explore-shared-post-loading-container p {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #666;
+}

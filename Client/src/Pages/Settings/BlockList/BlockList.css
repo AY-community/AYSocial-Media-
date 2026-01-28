@@ -1,0 +1,220 @@
+.blocklist-container {
+  width: 100%;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+.blocklist-info-banner {
+  padding: 20px 40px 40px 40px;
+  background: var(--primary-color);
+  border-radius: var(--border-radius-primary);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-block: 20px;
+  width: 100%;
+}
+
+.blocklist-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.blocklist-info-banner h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.blocklist-info-banner p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin: 0;
+  max-width: 600px;
+}
+
+.blocklist-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 8px;
+  padding: 0;
+  transition: opacity 0.2s ease;
+  opacity: 0.8;
+}
+
+.blocklist-back-btn:hover {
+  opacity: 1;
+}
+
+.blocklist-card {
+  background: var(--third-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--border-radius-primary);
+  padding: 32px;
+  box-shadow: var(--border-shadow-primary);
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.blocklist-description {
+  font-size: 14px;
+  color: var(--secondary-text-color);
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.blocked-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.blocked-user-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-radius: var(--border-radius-primary);
+  transition: all 0.2s ease;
+}
+
+.blocked-user-item:hover {
+  border-color: var(--secondary-text-color);
+}
+
+.blocked-user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.blocked-user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--input-border-color);
+}
+
+.blocked-user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.blocked-user-username {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.blocked-user-username:hover {
+  color: var(--primary-color);
+}
+
+.blocked-user-name {
+  font-size: 14px;
+  color: var(--secondary-text-color);
+}
+
+.unblock-btn {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.empty-blocklist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.empty-blocklist-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty-blocklist h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0 0 8px 0;
+}
+
+.empty-blocklist p {
+  font-size: 14px;
+  color: var(--secondary-text-color);
+  margin: 0;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+.blocklist-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+@media (max-width: 1000px) {
+  .blocklist-info-banner {
+    margin-block: 15px;
+    width: 100%;
+  }
+
+  .blocklist-card {
+    padding: 20px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .blocklist-back-btn {
+    display: none;
+  }
+
+  .blocklist-info-banner {
+    padding: 40px 20px 30px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .blocklist-info-banner h1 {
+    font-size: 28px;
+  }
+
+  .blocklist-card {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .empty-blocklist {
+    padding: 30px 20px;
+  }
+
+  .empty-blocklist-icon {
+    width: 70px;
+    height: 70px;
+  }
+}

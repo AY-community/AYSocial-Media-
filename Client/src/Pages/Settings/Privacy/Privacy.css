@@ -1,0 +1,246 @@
+.privacy-container {
+  width: 100%;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+.privacy-info-banner {
+  padding: 20px 40px 40px 40px;
+  background: var(--primary-color);
+  border-radius: var(--border-radius-primary);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-block: 20px;
+  width: 100%;
+}
+
+.privacy-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.privacy-info-banner h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.privacy-info-banner p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin: 0;
+  max-width: 600px;
+}
+
+/* --- BACK BUTTON STYLING --- */
+.privacy-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 8px;
+  padding: 0;
+  transition: opacity 0.2s ease;
+  opacity: 0.8;
+}
+
+.privacy-back-btn:hover {
+  opacity: 1;
+}
+/* --------------------------- */
+
+
+.privacy-card {
+  background: var(--third-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--border-radius-primary);
+  padding: 32px; 
+  box-shadow: var(--border-shadow-primary);
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--input-border-color);
+  margin: 30px 0;
+  opacity: 0.5;
+}
+
+.setting-group {
+    margin-bottom: 30px;
+}
+
+.setting-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--input-border-color);
+}
+
+.setting-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 15px;
+}
+
+.setting-details {
+    flex-grow: 1;
+    margin-right: 30px;
+}
+
+.setting-details h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0 0 4px 0;
+}
+
+.setting-details p {
+    font-size: 14px;
+    color: var(--secondary-text-color);
+    margin: 0;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--input-border-color);
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--primary-color);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+  background-color: white;
+}
+
+.slider.round {
+  border-radius: 28px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.select-wrapper {
+    position: relative;
+    min-width: 150px;
+    z-index: 10;
+}
+
+.select-control {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius-primary);
+    color: var(--text-color);
+    font-size: 15px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="%238A8A8A" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    transition: border-color 0.2s;
+}
+
+.select-control:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+
+@media (max-width: 1000px) {
+    .privacy-back-btn{
+    display: none;
+  }
+  
+  
+}
+
+
+@media (max-width: 768px) {
+    .privacy-card {
+        padding: 20px;
+    }
+
+    .privacy-info-banner{
+    padding: 40px 20px 30px 20px;
+margin-bottom: 20px;
+    }
+
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .setting-details {
+        margin-right: 0;
+    }
+
+    
+}
+
+

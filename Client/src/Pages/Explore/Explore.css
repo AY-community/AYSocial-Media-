@@ -1,0 +1,246 @@
+:root {
+  --grid-gap: 8px;
+}
+
+.explore-page-heading {
+  width: 100%;
+  padding: 25px;
+  max-width: 2210px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.explore-page-heading h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.explore-input-div {
+  width: 250px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-secondary);
+  background-color: var(--input-header-color);
+  border: var(--input-border-color) 1px solid;
+  display: none;
+  align-items: center;
+}
+
+.explore-input-div input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--text-primary-color);
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+.explore-search-icon {
+  color: var(--text-secondary-color);
+}
+
+/* Grid with original sizing */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--grid-gap);
+  grid-auto-rows: 250px;
+  padding: 0 20px;
+  margin-bottom: 40px;
+}
+
+.grid-item {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: var(--background-secondary);
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.grid-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Video indicator */
+.video-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  z-index: 2;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Hover overlay */
+.grid-item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 8px;
+}
+
+.grid-item:hover .grid-item-overlay {
+  opacity: 1;
+}
+
+.overlay-stats {
+  display: flex;
+  gap: 20px;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.overlay-stats span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+}
+
+/* Like icon primary color */
+.overlay-stats span:first-child svg {
+  color: var(--primary-color);
+}
+
+/* Videos span wider */
+.grid-item-video {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+/* Loading states */
+.explore-loading {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.loading-spinner {
+  color: var(--primary-color);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.observer-target {
+  height: 20px;
+  width: 100%;
+}
+
+.explore-end-message,
+.explore-empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--secondary-text-color);
+}
+
+.explore-error {
+  text-align: center;
+  padding: 40px;
+  color: var(--danger-color);
+}
+
+.explore-error button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.explore-error button:hover {
+  opacity: 0.9;
+}
+
+.explore-shared-post-feed{
+  padding-block: 40px;
+
+}
+
+.explore-shared-post-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-height: 900px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .explore-page-heading h1 {
+    font-size: 28px;
+  }
+
+  .explore-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-auto-rows: 150px;
+  }
+}
+
+/* Desktop search bar visibility */
+@media (max-width: 1000px) {
+  .explore-input-div {
+    display: flex;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .explore-page-heading h1 {
+    font-size: 26px;
+  }
+
+  .explore-page-heading {
+    padding: 30px 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .explore-input-div {
+    width: 100%;
+  }
+
+  .explore-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 120px;
+    gap: 4px;
+    padding: 0 10px;
+    margin-bottom: 80px;
+  }
+
+  .grid-item-video {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  .video-indicator {
+    top: 6px;
+    right: 6px;
+  }
+}

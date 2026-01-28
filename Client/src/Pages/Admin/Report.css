@@ -1,0 +1,153 @@
+.report-container {
+    width: 100%;
+    padding: 0;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.report-filters {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.report-filters button {
+    background: var(--third-color);
+    border: 1px solid var(--input-border-color);
+    color: var(--text-color);
+    padding: 8px 16px;
+    border-radius: var(--border-radius-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.report-filters button:hover {
+    background: var(--secondary-color);
+    border-color: var(--primary-color);
+}
+
+.report-filters button.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.report-table-container {
+    background: var(--third-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius-primary);
+    overflow-x: auto;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.report-table th, .report-table td {
+    padding: 16px;
+    text-align: left;
+    color: var(--text-color);
+}
+
+.report-table th {
+    background-color: var(--secondary-color);
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.report-table th:hover {
+    background-color: var(--input-header-color);
+}
+
+.report-table th svg {
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.report-table tr:last-child td {
+    border-bottom: none;
+}
+
+.report-table tr:hover {
+    background-color: var(--secondary-color);
+}
+
+.report-type-badge, .report-status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.report-type-badge.user {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+.report-type-badge.post {
+    background: rgba(33, 150, 243, 0.1);
+    color: #2196F3;
+}
+
+.report-type-badge.video {
+    background: rgba(156, 39, 176, 0.1);
+    color: #9C27B0;
+}
+
+.report-status-badge.pending {
+    background: var(--report-pending-bg);
+    color: var(--report-pending-text);
+}
+
+.report-status-badge.resolved {
+    background: var(--report-resolved-bg);
+    color: var(--report-resolved-text);
+}
+
+.report-status-badge.investigating {
+    background: var(--report-investigating-bg);
+    color: var(--report-investigating-text);
+}
+   .report-container .report-actions {
+    display: flex;
+    gap: 8px;
+}
+ 
+ .report-container .action-btn {
+    padding: 6px 12px;
+    border-radius: var(--border-radius-primary);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+  .report-container .action-btn.view {
+    background-color: #2196F3;
+    color: white;
+}
+ .report-container .action-btn.view:hover{
+    opacity: 0.8;
+}
+
+  .report-container.action-btn.resolve {
+    background-color: #4CAF50;
+    color: white;
+}
+  .report-container .action-btn.resolve:hover{
+    opacity: 0.8;
+}
+
+
+ .report-container .action-btn.delete {
+    background-color: var(--danger-color);
+    color: white;
+}
+ .report-container .action-btn.delete:hover{
+    opacity: 0.8;
+}

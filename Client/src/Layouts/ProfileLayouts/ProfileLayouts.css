@@ -1,0 +1,267 @@
+.follower-card {
+    width: 12%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 16px;
+    border: var(--input-border-color) 1px solid;
+    background: var(--third-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.follower-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.follower-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.follower-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.follower-card .follower-info {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.02));
+}
+
+.follower-card .follower-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary-color);
+    margin: 0;
+}
+
+.follower-card .follower-info p {
+    color: var(--text-secondary-color);
+    min-width: 20px;
+    min-height: 1.2em; 
+    display: block;
+    font-size: 13px;
+    margin: 0;
+    opacity: 0.8;
+}
+
+.follower-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.follower-button {
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    margin: 0 12px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.follower-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.follower-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.follower-button:hover {
+    transform: scale(1.02);
+}
+
+.follower-button:active {
+    transform: scale(0.98);
+}
+
+.follower-actions .follower-button:first-child {
+    margin-top: 0;
+}
+
+.follower-actions .follower-button:last-child {
+    margin-bottom: 12px;
+}
+
+.btn-secondary.follower-button {
+    border: 1px solid var(--input-border-color);
+}
+
+.suggestions-section-profile-modal{
+                        border-top: 1px solid #e5e7eb;
+                      margin-top: 20px;
+                      padding-top: 20px;
+}
+
+.suggestions-title-profile-modal {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    color: var(--text-secondary);
+    position: relative;
+    display: inline-block;
+}
+
+.suggestions-title-profile-modal::after {
+    content: '';
+    position: absolute;
+    top: 120%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    border-radius: 4px;
+    background: linear-gradient(to right, #8A2BE2, #4169E1);
+}
+
+
+@media (max-width: 2600px) {
+    .follower-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;  
+      }
+
+    .follower-card {
+        width: 14%;}
+}
+
+@media (max-width: 2000px) {
+    .follower-card {
+        width: 16.2%;
+    }
+}
+
+@media (max-width: 1700px) {
+        .follower-card {
+        width: 19.4%;
+    }
+}
+
+
+
+
+
+
+@media (max-width: 1175px) {
+    .follower-card {
+        width: 32%;
+    }
+}
+
+@media (max-width: 768px) {
+    .follower-card {
+        width: 49%;
+    }
+}
+
+@media (max-width: 600px) {
+    .follower-card {
+        width: 100%;
+        max-width: 100%;
+        flex-direction: row;
+        align-items: center;
+        min-height: 104px;
+        max-height: 100px;
+    }
+    
+    .follower-card img {
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
+        border-radius: 50%;
+        margin: 12px;
+    }
+    
+    .follower-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        flex: 1;
+        padding: 12px 12px 12px 0;
+        gap: 12px;
+    }
+
+    .follower-list{
+        padding-inline: 10px;
+    }
+    
+    .follower-card .follower-info {
+        padding: 0;
+        flex: 1;
+        background: none;
+        min-width: 0;
+    }
+
+    .follower-card .follower-info h3 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .follower-card .follower-info p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .follower-actions {
+        flex-direction: column;
+        gap: 8px;
+        flex-shrink: 0;
+    }
+    
+    .follower-button {
+        margin: 0;
+        padding: 8px 16px;
+        white-space: nowrap;
+        min-width: 100px;
+    }
+    
+    .follower-actions .follower-button:last-child {
+        margin-bottom: 0;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .follower-card {
+        background-color: var(--secondary-color);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .follower-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+}
+
+[data-theme="dark"] {
+    .follower-card {
+        background-color: var(--secondary-color);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    .follower-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+}

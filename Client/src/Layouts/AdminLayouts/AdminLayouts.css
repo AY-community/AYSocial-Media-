@@ -1,0 +1,70 @@
+/* Admin Bottom Navigation - Mobile/Tablet Only */
+.admin-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--secondary-color);
+  border-top: 1px solid var(--input-border-color);
+  padding: 8px 0;
+  z-index: 1000;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-bottom-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.admin-bottom-nav a.active {
+  background: var(--primary-color);
+}
+
+.admin-bottom-nav a.active .bottom-nav-icon {
+  color: white;
+}
+
+.admin-bottom-nav a:hover {
+  background: var(--third-color);
+}
+
+.admin-bottom-nav .bottom-nav-icon {
+  color: var(--text-color);
+  transition: color 0.2s ease;
+}
+
+/* Show bottom nav on mobile/tablet for admin pages */
+@media (max-width: 1024px) {
+  .admin-bottom-nav {
+    display: flex;
+  }
+
+  /* Hide admin sidebar on mobile/tablet */
+  .admin-sidebar {
+    display: none !important;
+  }
+
+  /* Add padding to admin content to prevent overlap with bottom nav */
+  .admin-layout {
+    padding-bottom: 70px;
+  }
+}
+
+/* Extra small screens - reduce icon size */
+@media (max-width: 480px) {
+  .admin-bottom-nav .bottom-nav-icon {
+    font-size: 22px;
+  }
+
+  .admin-bottom-nav a {
+    padding: 6px 8px;
+  }
+}

@@ -1,0 +1,346 @@
+/* ExploreCard.css */
+.clickable {
+  cursor: pointer;
+}
+
+/* ============================================
+   EXPLORE CARD - SHARED COMPONENT
+   ============================================ */
+.explore-card {
+  background: var(--third-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--border-radius-primary);
+  padding: 20px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.explore-card:hover {
+  box-shadow: var(--border-shadow-primary);
+}
+
+/* Header */
+.explore-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.explore-card-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.explore-card-user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.explore-card-username {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-color);
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.explore-card-handle {
+  font-size: 13px;
+  color: var(--secondary-text-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.explore-card-time {
+  font-size: 13px;
+  color: var(--secondary-text-color);
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+/* Follow Button */
+.explore-card-follow-btn {
+  margin-left: auto;
+  margin-right: 8px;
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: var(--border-radius-primary);
+}
+
+.explore-card-follow-btn:hover {
+  background-color: rgba(138, 43, 226, 0.1);
+}
+
+.explore-card-follow-btn.nfollow {
+  background-color: var(--secondary-color);
+  color: var(--text-primary-color);
+  border: 1px solid var(--input-border-color);
+}
+
+.explore-card-follow-btn.nfollow:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.explore-card-follow-btn.requested {
+  color: var(--primary-color);
+}
+
+.explore-card-follow-btn.requested:hover {
+  background-color: rgba(138, 43, 226, 0.1);
+}
+
+/* Menu */
+.explore-card-menu {
+  background: transparent;
+  border: none;
+  color: var(--secondary-text-color);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.explore-card-menu:hover {
+  background: var(--secondary-color);
+  color: var(--text-color);
+}
+
+.explore-card-menu-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--third-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 150px;
+  overflow: hidden;
+}
+
+.explore-card-menu-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 5px 0;
+}
+
+.explore-card-menu-dropdown li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.explore-card-menu-dropdown li:hover {
+  background-color: var(--secondary-color);
+}
+
+.explore-card-menu-dropdown li svg {
+  color: var(--secondary-text-color);
+  width: 20px;
+  height: 20px;
+}
+
+.explore-card-menu-dropdown li.report-item {
+  color: var(--danger-color);
+}
+
+.explore-card-menu-dropdown li.report-item svg {
+  color: var(--danger-color);
+}
+
+.explore-card-menu-dropdown li.report-item:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Content */
+.explore-card-content {
+  margin-bottom: 16px;
+}
+
+.explore-card-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-color);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Media */
+.explore-card-media {
+  margin-bottom: 16px;
+  border-radius: var(--border-radius-primary);
+  overflow: hidden;
+  position: relative;
+  max-width: 100%;
+  max-height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+}
+
+.explore-card-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.explore-card-media video {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}
+
+.explore-card-video {
+  cursor: pointer;
+  position: relative;
+}
+
+.explore-card-video-mute-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.explore-card-video-mute-btn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Like Animation */
+.like-heart-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: like-heart-beat 1s ease-out forwards;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes like-heart-beat {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+  .explore-card {
+    padding: 16px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .explore-card-header {
+    padding-block: 8px;
+  }
+
+  .explore-card-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .explore-card-username {
+    font-size: 15px;
+  }
+
+  .explore-card-handle {
+    font-size: 14px;
+  }
+
+  .explore-card-text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .explore-card {
+    padding: 12px;
+  }
+
+  .explore-card-header {
+    padding-block: 10px;
+  }
+
+  .explore-card-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .explore-card-username {
+    font-size: 14px;
+  }
+
+  .explore-card-handle {
+    font-size: 13px;
+  }
+
+  .explore-card-text {
+    font-size: 14px;
+  }
+
+  .explore-card-follow-btn {
+    display: none;
+  }
+}

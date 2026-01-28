@@ -1,0 +1,333 @@
+/* Admin Reviews Container */
+.admin-review-container {
+    width: 100%;
+    padding: 0;
+    margin-top: 20px;
+}
+
+/* Admin Reviews Filters */
+.admin-review-filters {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.admin-review-filters button {
+    background: var(--third-color);
+    border: 1px solid var(--input-border-color);
+    color: var(--text-color);
+    padding: 8px 16px;
+    border-radius: var(--border-radius-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.admin-review-filters button:hover {
+    background: var(--secondary-color);
+    border-color: var(--primary-color);
+}
+
+.admin-review-filters button.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Admin Reviews Table Container */
+.admin-review-table-container {
+    background: var(--third-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius-primary);
+    overflow-x: auto;
+}
+
+/* Admin Reviews Table */
+.admin-review-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-review-table th, 
+.admin-review-table td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--input-border-color);
+    color: var(--text-color);
+}
+
+.admin-review-table th {
+    background-color: var(--secondary-color);
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.admin-review-table th:hover {
+    background-color: var(--input-header-color);
+}
+
+.admin-review-table th svg {
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+.admin-review-table tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-review-table tr:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Admin Review User Info Cell */
+.admin-review-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.admin-review-user-info strong {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.admin-review-user-id {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* Admin Review Rating Cell */
+.admin-review-rating-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-review-star-display {
+    display: flex;
+    gap: 2px;
+}
+
+.admin-review-star-icon {
+    color: var(--text-tertiary);
+}
+
+.admin-review-star-icon.filled {
+    color: #fbbf24;
+}
+
+.admin-review-rating-info {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.admin-review-rating-label {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-color);
+}
+
+.admin-review-rating-number {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* Admin Review Feedback Cell */
+.admin-review-feedback-cell {
+    max-width: 400px;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+/* Admin Review Status Badge */
+.admin-review-status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: inline-block;
+}
+
+.admin-review-status-badge.pending {
+    background: rgba(255, 152, 0, 0.1);
+    color: #FF9800;
+}
+
+.admin-review-status-badge.approved {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+}
+
+.admin-review-status-badge.rejected {
+    background: rgba(244, 67, 54, 0.1);
+    color: #F44336;
+}
+
+/* Admin Review Actions */
+.admin-review-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.admin-review-action-btn {
+    padding: 6px 12px;
+    border-radius: var(--border-radius-primary);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.admin-review-action-btn.approve {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.admin-review-action-btn.approve:hover {
+    opacity: 0.8;
+}
+
+.admin-review-action-btn.reject {
+    background-color: #FF9800;
+    color: white;
+}
+
+.admin-review-action-btn.reject:hover {
+    opacity: 0.8;
+}
+
+.admin-review-action-btn.delete {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.admin-review-action-btn.delete:hover {
+    opacity: 0.8;
+}
+
+.admin-review-action-btn.flag {
+    background-color: #FF9800;
+    color: white;
+}
+
+.admin-review-action-btn.flag:hover {
+    opacity: 0.8;
+}
+
+
+/* Admin Review Loading */
+.admin-review-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    gap: 1rem;
+}
+
+.admin-review-loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--input-border-color);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.admin-review-loading p {
+    color: var(--text-secondary);
+}
+
+/* Admin Review Empty State */
+.admin-review-empty {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+
+/* Admin Review Pagination */
+.admin-review-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 20px;
+    background: var(--third-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius-primary);
+}
+
+.pagination-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-primary);
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    opacity: 0.8;
+}
+
+.pagination-btn:disabled {
+    background: var(--input-border-color);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.pagination-info {
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .admin-review-pagination {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+     .admin-review-pagination  .pagination-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* Responsive */
+@media (max-width: 1200px) {
+    .admin-review-table {
+        font-size: 14px;
+    }
+    
+    .admin-review-feedback-cell {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .admin-review-filters {
+        flex-wrap: wrap;
+    }
+    
+    .admin-review-table-container {
+        overflow-x: scroll;
+    }
+    
+    .admin-review-table {
+        min-width: 1000px;
+    }
+}

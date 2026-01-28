@@ -1,0 +1,129 @@
+.notifications-header {
+  width: 100%;
+  padding: 25px;
+  max-width: 2210px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notifications-header p {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 0;
+  user-select: none;
+}
+
+.notifications-header p:hover {
+  color: var(--primary-color-dark);
+  text-decoration: underline;
+}
+
+.notifications-list {
+  background-color: var(--third-color);
+  border-radius: var(--border-radius-primary);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  gap: 10px;
+}
+
+.no-notifications-text {
+  font-size: 25px;
+}
+
+.empty-notification-container {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comment-loading-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+/* Add this to your Notifications.css */
+
+.follow-requests-banner {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.follow-requests-banner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.follow-requests-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: white;
+}
+
+.follow-requests-content svg {
+  flex-shrink: 0;
+}
+
+.follow-requests-text h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+.follow-requests-text p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.follow-requests-arrow {
+  font-size: 28px;
+  color: white;
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .follow-requests-banner {
+    padding: 16px;
+  }
+
+  .follow-requests-text h3 {
+    font-size: 16px;
+  }
+
+  .follow-requests-text p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 600px) {
+    .notifications-header h1 {
+        font-size: 26px;
+    }
+
+    .notifications-header h1 span {
+display: none;    }
+
+}

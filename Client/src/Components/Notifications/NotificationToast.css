@@ -1,0 +1,166 @@
+.notification-toast {
+  background: var(--third-color);
+  padding: 16px;
+  border-radius: var(--border-radius-primary);
+  box-shadow: var(--border-shadow-secondary);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 340px;
+  max-width: 420px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid var(--input-border-color);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification-toast:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(138, 43, 226, 0.15);
+  border-color: var(--primary-color);
+}
+
+.notification-toast-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 2px 8px rgba(138, 43, 226, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.notification-toast:hover .notification-toast-avatar {
+  transform: scale(1.05);
+}
+
+.notification-toast-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notification-toast-username {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.notification-toast-message {
+  font-size: 13px;
+  color: var(--secondary-text-color);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.notification-toast-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--secondary-text-color);
+  cursor: pointer;
+  padding: 4px 6px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-toast-close:hover {
+  color: var(--text-color);
+  background: var(--secondary-color);
+  transform: rotate(90deg);
+}
+
+.notification-toast-close:active {
+  transform: rotate(90deg) scale(0.9);
+}
+
+/* Notification type indicators */
+.notification-toast::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--primary-color);
+  border-radius: var(--border-radius-primary) 0 0 var(--border-radius-primary);
+}
+
+/* Add pulse animation for new notifications */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(138, 43, 226, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(138, 43, 226, 0);
+  }
+}
+
+.notification-toast-avatar {
+  animation: pulse 2s ease-in-out 1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .notification-toast {
+    min-width: 300px;
+    max-width: calc(100vw - 32px);
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .notification-toast-avatar {
+    width: 44px;
+    height: 44px;
+  }
+
+  .notification-toast-username {
+    font-size: 14px;
+  }
+
+  .notification-toast-message {
+    font-size: 12px;
+  }
+}
+
+/* Extra smooth transitions */
+.notification-toast * {
+  transition: all 0.2s ease;
+}
+
+/* Focus states for accessibility */
+.notification-toast:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.notification-toast-close:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  border-radius: 6px;
+}

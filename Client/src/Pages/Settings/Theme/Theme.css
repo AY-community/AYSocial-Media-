@@ -1,0 +1,226 @@
+.theme-container {
+  width: 100%;
+  padding-bottom: 10px; 
+  margin-top: 20px;
+}
+
+.theme-info-banner {
+  padding: 20px 40px 40px 40px;
+  background: var(--primary-color);
+  border-radius: var(--border-radius-primary);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-block: 20px;
+  width: 100%;
+}
+
+.theme-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.theme-info-banner h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.theme-info-banner p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin: 0;
+  max-width: 600px;
+}
+
+.theme-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 8px;
+  padding: 0;
+  transition: opacity 0.2s ease;
+  opacity: 0.8;
+}
+
+.theme-back-btn:hover {
+  opacity: 1;
+}
+
+.theme-card {
+  background: var(--third-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--border-radius-primary);
+  padding: 32px; 
+  box-shadow: var(--border-shadow-primary);
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.theme-card .divider {
+  height: 1px;
+  background-color: var(--input-border-color);
+  margin: 25px 0;
+  opacity: 0.5;
+}
+
+.theme-card .setting-group {
+  margin-bottom: 0;
+}
+
+.theme-card .setting-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.theme-card .setting-header h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.theme-card .color-swatch-list {
+  display: flex;
+  gap: 15px;
+  margin-top: 12px;
+}
+
+.theme-card .color-swatch-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px var(--input-border-color);
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-card .color-swatch-item:hover {
+  transform: scale(1.08);
+}
+
+.theme-card .selected-swatch {
+  box-shadow: 0 0 0 4px var(--third-color), 0 0 0 6px var(--primary-color);
+  transform: scale(1.08);
+}
+
+.theme-card .theme-options-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 12px;
+  max-width: 1000px;
+}
+
+.theme-card .theme-option-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  border: 2px solid var(--input-border-color);
+  border-radius: var(--border-radius-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  background: var(--secondary-color);
+}
+
+.theme-card .theme-radio-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-card .theme-option-item:hover {
+  border-color: var(--secondary-text-color);
+}
+
+.theme-card .selected-theme {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.2);
+}
+
+.theme-card .theme-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.theme-card .theme-icon-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary-color);
+  margin-bottom: 4px;
+}
+
+.theme-card .theme-details h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.theme-card .theme-details p {
+  font-size: 14px;
+  color: var(--secondary-text-color);
+  margin: 0;
+}
+
+@media (max-width: 1000px) {
+
+
+  .theme-info-banner {
+    margin-block: 15px;
+    width: 100%;
+  }
+  
+  .theme-card {
+    padding: 20px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-back-btn{
+    display: none;
+  }
+  .theme-info-banner {
+    padding: 40px 20px 30px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+
+
+
+  
+  .theme-card {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .theme-card .theme-options-list {
+    grid-template-columns: 1fr;
+  }
+}

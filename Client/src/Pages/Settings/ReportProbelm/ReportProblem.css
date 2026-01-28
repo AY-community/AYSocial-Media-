@@ -1,0 +1,332 @@
+.rp-container {
+  width: 100%;
+  padding-bottom: 10px;
+  margin-top: 20px;
+}
+
+.rp-info-banner {
+  padding: 20px 40px 40px 40px;
+  background: var(--primary-color);
+  border-radius: var(--border-radius-primary);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-block: 20px;
+  width: 100%;
+}
+
+.rp-info-banner svg {
+  margin-bottom: 0;
+}
+
+.rp-header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.rp-info-banner h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.rp-info-banner p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin: 0;
+  max-width: 600px;
+}
+
+.rp-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 8px;
+  padding: 0;
+  transition: opacity 0.2s ease;
+  opacity: 0.8;
+}
+
+.rp-back-btn:hover {
+  opacity: 1;
+}
+
+.rp-card {
+  background: var(--third-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--border-radius-primary);
+  padding: 20px 30px;
+  box-shadow: var(--border-shadow-primary);
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.rp-card .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 30px;
+}
+
+.rp-card .input-group label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.rp-card .input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rp-card .input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--secondary-text-color);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rp-card .textarea-wrapper {
+  position: relative;
+}
+
+.rp-card .textarea-wrapper .input-icon {
+  top: 14px;
+}
+
+.rp-card .input-wrapper input {
+  width: 100%;
+  padding: 14px 45px;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--border-radius-primary);
+  color: var(--text-color);
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.rp-card .input-wrapper input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+  outline: none;
+}
+
+.rp-card .input-wrapper input::placeholder {
+  color: var(--secondary-text-color);
+  opacity: 0.7;
+}
+
+.rp-card .select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rp-card .select-wrapper select {
+  width: 100%;
+  padding: 14px 45px;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--border-radius-primary);
+  color: var(--text-color);
+  font-size: 15px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+}
+
+.rp-card .select-wrapper select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+  outline: none;
+}
+
+.rp-card .textarea-wrapper textarea {
+  width: 100%;
+  padding: 14px 45px;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--input-border-color);
+  border-radius: var(--border-radius-primary);
+  color: var(--text-color);
+  font-size: 15px;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.rp-card .textarea-wrapper textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+  outline: none;
+}
+
+.rp-card .textarea-wrapper textarea::placeholder {
+  color: var(--secondary-text-color);
+  opacity: 0.7;
+}
+
+.rp-card .input-wrapper input.input-error,
+.rp-card .select-wrapper select.input-error,
+.rp-card .textarea-wrapper textarea.input-error {
+  border-color: var(--danger-color);
+}
+
+.rp-card .input-wrapper input.input-error:focus,
+.rp-card .select-wrapper select.input-error:focus,
+.rp-card .textarea-wrapper textarea.input-error:focus {
+  border-color: var(--danger-color);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.rp-card .input-helper {
+  font-size: 13px;
+  color: var(--secondary-text-color);
+  margin: 0;
+  margin-top: 6px;
+}
+
+.rp-card .error-message {
+  font-size: 13px;
+  color: var(--danger-color);
+  margin: 0;
+  margin-top: 6px;
+}
+
+.rp-card .success-banner {
+  padding: 12px 16px;
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--border-radius-primary);
+  color: #10b981;
+  font-size: 14px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.rp-card .general-error-message {
+  padding: 12px 16px;
+  background-color: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  border-radius: var(--border-radius-primary);
+  color: var(--danger-color);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.rp-card .divider {
+  height: 1px;
+  background-color: var(--input-border-color);
+  margin: 0px 0 30px 0;
+  opacity: 0.5;
+}
+
+.rp-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.rp-actions .btn-submit {
+  padding: 12px 24px;
+  background: var(--primary-color);
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: var(--border-radius-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.25);
+}
+
+.rp-actions .btn-submit:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.rp-actions .btn-submit:active {
+  transform: translateY(0);
+}
+
+.rp-actions .btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.rp-actions .btn-submit:disabled:hover {
+  filter: none;
+  transform: none;
+}
+
+@media (max-width: 1000px) {
+  .rp-info-banner {
+    margin-block: 15px;
+    width: 100%;
+  }
+  
+  .rp-card {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .rp-back-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .rp-info-banner {
+    padding: 40px 20px 30px 20px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  
+  .rp-card {
+    padding: 20px;
+    padding-top: 30px;
+    width: 100%;
+  }
+
+  .rp-card .input-group {
+    gap: 15px;
+    margin-bottom: 50px;
+  }
+
+  .rp-card .divider {
+    display: none;
+  }
+
+  .rp-actions {
+    flex-direction: column-reverse;
+  }
+  
+  .rp-actions .btn-submit {
+    width: 100%;
+    justify-content: center;
+  }
+}
