@@ -7,7 +7,7 @@ import Header from "../../Layouts/MainLayouts/Header";
 import MainSideBar from "../../Layouts/MainLayouts/MainSideBar";
 import { MapPin, CircleNotch } from "phosphor-react";
 import defaultProfilePic from "../../assets/Profile/defaultProfilePic.jpg";
-import Planning from "../../assets/brazuca - planning.png";
+import Planning from "../../assets/Brazuca - Planning.png";
 import BottomNav from "../../Layouts/MainLayouts/BottomNav";
 import PostCard from "../../Layouts/PostLayouts/PostCard";
 import VideoCard from "../../Layouts/PostLayouts/VideoCard";
