@@ -6,7 +6,7 @@ import './Users.css';
 import { useTranslation } from "react-i18next";
 import { Users as UsersIcon, MagnifyingGlass, SortAscending, SortDescending } from "phosphor-react";
 import ConfirmDeleteAcccountModal from '../../Layouts/ConfirmLayouts/ConfirmDeleteAccount';
-import DefaultProfilePic from '../../Assets/Profile/DefaultProfilePic.jpg';
+import DefaultProfilePic from '../../Assets/Profile/defaultProfilePic.jpg';
 import SEO from '../../Utils/SEO';
 
 const API_URL = import.meta.env.VITE_API;
