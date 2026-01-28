@@ -11,7 +11,7 @@ import defaultProfilePic from "../../assets/Profile/defaultProfilePic.jpg";
 import { MapPin, CircleNotch } from "phosphor-react";
 import PostCard from "../../Layouts/PostLayouts/PostCard";
 import VideoCard from "../../Layouts/PostLayouts/VideoCard";
-import standindPerson from "../../assets/Brazuca - airport.png";
+import standindPerson from "../../assets/Brazuca - Airport.png";
 import postImage from "../../assets/Brazuca - Screen 4.png";
 import DeletePostModal from "../../Layouts/PostLayouts/DeletePostModal";
 import EditPostModal from "../../Layouts/PostLayouts/EditPostModal";
