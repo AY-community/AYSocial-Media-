@@ -13,11 +13,11 @@ import Header from "../../Layouts/MainLayouts/Header";
 import MainSideBar from "../../Layouts/MainLayouts/MainSideBar";
 import BottomNav from "../../Layouts/MainLayouts/BottomNav";
 import cssImg from '../../assets/Skills/css.png';
-import expressImg from '../../assets/Skills/express.png';
+import expressImg from '../../assets/Skills/Express.png';
 import jsImg from '../../assets/Skills/js.png';
 import mongodbImg from '../../assets/Skills/mongodb.png';
 import nodeImg from '../../assets/Skills/node.png';
-import reactImg from '../../assets/Skills/react.png';
+import reactImg from '../../assets/Skills/React.png';
 import SEO from "../../Utils/SEO";
 
 
