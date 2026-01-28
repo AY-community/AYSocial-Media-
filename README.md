@@ -207,11 +207,10 @@ Built a comprehensive administrative system featuring:
 
 ## 📞 Contact
 
-**Developer:** Your Name  
-**Email:** your.email@example.com  
-**LinkedIn:** [linkedin.com/in/yourprofile](#)  
-**Portfolio:** [yourportfolio.com](#)  
-**GitHub:** [@yourusername](https://github.com/yourusername)
+**Developer:** Chedri Maamar Aymen  
+**Email:** aymenchedri@gmail.com
+**Portfolio:** [https://ay-portfolio-template.vercel.app](#)  
+**GitHub:** [@AY-community](https://github.com/AY-community)
 
 ---
 
