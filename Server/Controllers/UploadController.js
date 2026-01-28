@@ -1,4 +1,4 @@
-const cloudinary = require("../config/Cloudinary");
+const cloudinary = require("../Config/Cloudinary");
 const User = require("../Models/User");
 const Video = require("../Models/Video");
  const deleteFromCloudinary = async (imageUrl) => {
