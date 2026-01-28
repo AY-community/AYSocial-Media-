@@ -7,7 +7,7 @@ const Video = require("../Models/Video");
 const Message = require("../Models/Message");
 const Report = require("../Models/Report");
 const Review = require("../Models/Review");
-const cloudinary = require("../config/Cloudinary");
+const cloudinary = require("../Config/Cloudinary");
 
 
 const isBlockedBetween = (userA, userBId) => {
