@@ -12,7 +12,7 @@ import BottomNav from "../../Layouts/MainLayouts/BottomNav";
 import PostCard from "../../Layouts/PostLayouts/PostCard";
 import VideoCard from "../../Layouts/PostLayouts/VideoCard";
 import DisplayModal from "../../Layouts/PostLayouts/DisplayPostModal";
-import standindPerson from "../../assets/Brazuca - airport.png";
+import standindPerson from "../../assets/Brazuca - Airport.png";
 import standingPerson2 from "../../assets/Brazuca - Planning (3).png";
 import DisplayVideoModal from "../../Layouts/VideoLayouts/DisplayVideoModal";
 import ContentModal from "../../Layouts/ProfileLayouts/ContentModal";
