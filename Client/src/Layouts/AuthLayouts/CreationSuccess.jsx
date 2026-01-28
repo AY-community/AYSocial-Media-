@@ -1,4 +1,4 @@
-import successImage from "../../Assets/success.png";
+import successImage from "../../assets/success.png";
 import { useTranslation } from "react-i18next";
 
 export default function CreationSuccess({ toggleModal }) {
