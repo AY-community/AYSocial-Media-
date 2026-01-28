@@ -1,4 +1,4 @@
-import "./privacy.css";
+import "./Privacy.css";
 import Header from "../../../Layouts/MainLayouts/Header";
 import MainSideBar from "../../../Layouts/MainLayouts/MainSideBar";
 import { Lock, User, EnvelopeSimple, CaretLeft } from "phosphor-react";

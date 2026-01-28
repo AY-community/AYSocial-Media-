@@ -1,4 +1,4 @@
-import "./theme.css";
+import "./Theme.css";
 import Header from "../../../Layouts/MainLayouts/Header";
 import MainSideBar from "../../../Layouts/MainLayouts/MainSideBar";
 import { Palette, CaretLeft, Sun, Moon, Desktop, Check } from "phosphor-react";

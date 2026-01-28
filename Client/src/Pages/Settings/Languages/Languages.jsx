@@ -1,4 +1,4 @@
-import "./languages.css";
+import "./Languages.css";
 import Header from "../../../Layouts/MainLayouts/Header";
 import MainSideBar from "../../../Layouts/MainLayouts/MainSideBar";
 import { GlobeSimple, CaretLeft } from "phosphor-react";

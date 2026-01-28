@@ -1,4 +1,4 @@
-import "./changePassword.css";
+import "./ChangePassword.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../../Layouts/MainLayouts/Header";

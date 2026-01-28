@@ -1,4 +1,4 @@
-import "./statics.css";
+import "./Statics.css";
 import { Shield, Lock, Eye, Fingerprint, ShieldCheck } from "phosphor-react";
 import Header from "../../Layouts/MainLayouts/Header";
 import MainSideBar from "../../Layouts/MainLayouts/MainSideBar";

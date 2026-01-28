@@ -1,4 +1,4 @@
-import "./settings.css";
+import "./Settings.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Layouts/MainLayouts/Header";

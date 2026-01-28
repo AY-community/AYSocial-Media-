@@ -15,7 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../../Context/AuthContext";
-import "./dashboard.css";
+import "./Dashboard.css";
 import SEO from "../../../Utils/SEO";
 
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from "chart.js";

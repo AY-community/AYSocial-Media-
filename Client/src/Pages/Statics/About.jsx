@@ -1,4 +1,4 @@
-import "./statics.css";
+import "./Statics.css";
 import { useTranslation } from "react-i18next";
 import { 
   Lightning, 
