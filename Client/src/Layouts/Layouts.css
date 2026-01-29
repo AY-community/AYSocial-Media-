@@ -3200,3 +3200,23 @@ header .nav-child-list{
   }
 }
 
+
+
+@media screen and (max-width: 350px) {
+  .social-actions {
+    gap: 15px;
+  }
+
+  .social-btn svg {
+    transform: scale(0.85);
+  }
+
+  .social-btn {
+    padding: 6px;
+  }
+
+  .social-count, .social-btn span {
+      font-size: 11px;
+  }
+}
+
