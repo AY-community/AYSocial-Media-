@@ -167,6 +167,11 @@
     padding-top: 0 !important;
   }
 
+  /* Add space above the fixed bottom nav (same value used on other pages) */
+  .settings-container {
+    margin-bottom: 100px;
+  }
+
   /* Show mobile-only items on mobile */
   .settings-item.mobile-only {
     display: flex;

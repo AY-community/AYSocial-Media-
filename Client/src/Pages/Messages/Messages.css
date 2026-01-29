@@ -1555,7 +1555,7 @@
 @media (max-width: 768px) {
   .messages-page-container {
     margin-top: 5px;
-    height: calc(100vh - 140px); /* Adjust for header + nav */
+    height: calc(100vh - 101px); /* Adjust for header + nav */
     border-radius: 0;
     width: 100%;
     margin-left: auto;
@@ -1856,7 +1856,7 @@
 /* Small mobile devices */
 @media (max-width: 480px) {
   .messages-page-container {
-    width: 98%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
   }

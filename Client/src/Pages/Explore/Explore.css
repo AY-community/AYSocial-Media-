@@ -50,7 +50,7 @@
   gap: var(--grid-gap);
   grid-auto-rows: 250px;
   padding: 0 20px;
-  margin-bottom: 40px;
+  margin-bottom: 48px; /* room for loader/footer without being too tall */
 }
 
 .grid-item {
@@ -130,9 +130,13 @@
 
 /* Loading states */
 .explore-loading {
+  width: 100%;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 8px 0;
+  margin: 8px 0 32px; /* avoid overlapping with bottom nav */
+  min-height: 24px;
 }
 
 .loading-spinner {
@@ -148,6 +152,8 @@
 .observer-target {
   height: 20px;
   width: 100%;
+  display: block;
+  margin-bottom: 16px; /* space for intersection */
 }
 
 .explore-end-message,
@@ -180,14 +186,16 @@
 
 .explore-shared-post-feed{
   padding-block: 40px;
-
 }
 
 .explore-shared-post-wrapper{
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 900px;
+  width: 100%;
+  /* Remove restrictive height to allow content to flow and loader to have space */
+  max-height: none;
+  padding-bottom: 48px; /* ensure extra space at bottom */
 }
 
 /* Tablet */
@@ -206,6 +214,20 @@
 @media (max-width: 1000px) {
   .explore-input-div {
     display: flex;
+  }
+
+  /* When bottom-nav is visible (<=1000px), increase space to avoid overlap */
+  .explore-grid {
+    margin-bottom: 96px;
+  }
+  .explore-loading {
+    margin-bottom: 64px;
+  }
+  .observer-target {
+    margin-bottom: 80px;
+  }
+  .explore-shared-post-wrapper {
+    padding-bottom: 96px;
   }
 }
 
@@ -231,7 +253,7 @@
     grid-auto-rows: 120px;
     gap: 4px;
     padding: 0 10px;
-    margin-bottom: 80px;
+    margin-bottom: 100px; /* extra space above fixed bottom nav */
   }
 
   .grid-item-video {
@@ -242,5 +264,18 @@
   .video-indicator {
     top: 6px;
     right: 6px;
+  }
+
+  .explore-loading {
+    width: 100%;
+    padding: 12px 0 24px; /* push away from bottom nav */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 64px;
+  }
+
+  .observer-target {
+    margin-bottom: 80px; /* ensure trigger stays above bottom nav */
   }
 }
