@@ -1,7 +1,5 @@
 /*Header*/
 
-
-
 header {
     background-color: var(--third-color);
     width: var(--width-header-desktop);
@@ -891,7 +889,6 @@ align-items: center;
             background: var(--third-color);
             border-radius: 16px;
             padding: 2rem;
-            width: 90%;
             max-width: 500px;
             max-height: 500px;
             overflow-y: auto;
@@ -901,6 +898,7 @@ align-items: center;
             border: 0.5px solid white;
             overscroll-behavior: contain;
             touch-action: manipulation;
+            width:  90%;
         }
 
         .modal-overlay.active .modal {
@@ -2193,7 +2191,7 @@ align-items: center;
   cursor: pointer;
   padding: 6px 0;
   margin-top: 8px;
-  margin-left: 35px;
+  margin-left: 20px;
   transition: opacity 0.2s ease;
 }
 
@@ -2209,7 +2207,7 @@ align-items: center;
   gap: 8px;
   margin-top: 12px;
   padding: 8px 0;
-  margin-left: 35px;
+  margin-left: 20px;
 }
 
 .reply-input {
@@ -2265,7 +2263,7 @@ align-items: center;
 /* Replies Section */
 .replies-section {
   margin-top: 16px;
-  margin-left: 35px;
+  margin-left: 20px;
   border-left: 2px solid var(--input-border-color);
   padding-left: 12px;
   display: flex;
@@ -2310,6 +2308,9 @@ align-items: center;
   margin-bottom: 10px;
 }
 
+
+
+
 .comment-input-wrapper {
   flex: 1;
   display: flex;
@@ -2319,6 +2320,7 @@ align-items: center;
   padding: 5px 10px;
   min-height: 44px;
   transition: all 0.2s ease;
+  min-width: 0;
 }
 
 .comment-input {
@@ -2330,6 +2332,7 @@ align-items: center;
   font-size: 1rem;
   resize: none;
   max-height: 120px;
+  min-width: 0;
 }
 
 .comment-input::placeholder {
@@ -3176,4 +3179,24 @@ header .nav-child-list{
     }
 }
 
+
+
+
+@media screen and (max-width: 350px) {
+  .social-actions {
+    gap: 15px;
+  }
+
+  .social-btn svg {
+    transform: scale(0.85);
+  }
+
+  .social-btn {
+    padding: 6px;
+  }
+
+  .social-count, .social-btn span {
+      font-size: 11px;
+  }
+}
 
