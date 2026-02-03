@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@faker-js/faker": "^10.0.0",
+    "@getbrevo/brevo": "^3.0.1",
     "axios": "^1.11.0",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.7.0",
@@ -14,12 +15,10 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.15.0",
     "multer": "^2.0.1",
-    "nodemailer": "^7.0.3",
     "nodemon": "^3.1.10",
     "otp-generator": "^4.0.1",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
-    "resend": "^6.9.1",
     "socket.io": "^4.8.1"
   }
 }
