@@ -150,11 +150,6 @@ const handleFinalDelete = async () => {
     const API_URL = import.meta.env.VITE_API;
     const userName = user.userName;
 
-    console.log('🔍 API_URL:', API_URL);
-    console.log('🔍 UserName:', userName);
-    console.log('🔍 Full URL:', `${API_URL}/account/${userName}`);
-
-    // Step 1: Delete the account
     const response = await fetch(`${API_URL}/account/${userName}`, {
       method: 'DELETE',
       headers: {
@@ -163,29 +158,20 @@ const handleFinalDelete = async () => {
       credentials: 'include',
     });
 
-    console.log('✅ Delete response status:', response.status);
-
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('❌ Delete failed:', errorText);
       throw new Error(`Delete failed: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
-    console.log('✅ Delete data:', data);
 
     if (data.success) {
-      // Step 2: Logout properly
-      console.log('🔍 Calling logout...');
       const logoutResponse = await fetch(`${API_URL}/logout`, {
         method: 'POST',
         credentials: 'include',
       });
       
-      console.log('✅ Logout response status:', logoutResponse.status);
-      
       const logoutData = await logoutResponse.json();
-      console.log('✅ Logout data:', logoutData);
       
       if (logoutResponse.ok) {
         alert(`✅ Account deleted successfully.\n\n📊 Details:\n- Deleted ${data.deletedMedia} media files\n- All posts, videos, and messages removed\n- All social connections cleaned up`);
@@ -203,11 +189,8 @@ const handleFinalDelete = async () => {
       setButtonLoading(false);
     }
   } catch (err) {
-    console.error('❌ Full error object:', err);
-    console.error('❌ Error name:', err.name);
-    console.error('❌ Error message:', err.message);
-    
-    alert(`❌ Error: ${err.message}\n\nCheck console for details`);
+    console.error('Error deleting account:', err);
+    alert(`❌ Error: ${err.message}`);
     setButtonLoading(false);
   }
 };
