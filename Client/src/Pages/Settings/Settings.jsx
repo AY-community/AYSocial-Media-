@@ -143,44 +143,57 @@ export default function Settings() {
     setShowSecondModal(true);
   };
 
-  const handleFinalDelete = async () => {
-    try {
-      setButtonLoading(true);
+const handleFinalDelete = async () => {
+  try {
+    setButtonLoading(true);
 
-      const API_URL = import.meta.env.VITE_API;
-      const userName = user.userName;
+    const API_URL = import.meta.env.VITE_API;
+    const userName = user.userName;
 
-      const response = await fetch(`${API_URL}/account/${userName}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    // Step 1: Delete the account
+    const response = await fetch(`${API_URL}/account/${userName}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      // Step 2: Logout properly (same as your working logout)
+      const logoutResponse = await fetch(`${API_URL}/logout`, {
+        method: 'POST',
         credentials: 'include',
       });
-
-      const data = await response.json();
-
-      if (data.success) {
-        await fetch(`${API_URL}/logout`, {
-          method: 'POST',
-          credentials: 'include',
-        });
-        
-        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        
+      
+      const logoutData = await logoutResponse.json();
+      
+      // Step 3: Only navigate if logout succeeded
+      if (logoutResponse.ok) {
         alert(`✅ Account deleted successfully.\n\n📊 Details:\n- Deleted ${data.deletedMedia} media files\n- All posts, videos, and messages removed\n- All social connections cleaned up`);
+        
+        // Clear any local storage
+        localStorage.clear();
+        sessionStorage.clear();
         
         navigate('/auth');
       } else {
-        alert('❌ Failed to delete account: ' + data.error);
-        setButtonLoading(false);
+        console.error('Logout failed:', logoutData.error);
+        // Still navigate even if logout fails
+        navigate('/auth');
       }
-    } catch (err) {
-      console.error('Error deleting account:', err);
-      alert('❌ Error: ' + err.message);
+    } else {
+      alert('❌ Failed to delete account: ' + data.error);
       setButtonLoading(false);
     }
-  };
+  } catch (err) {
+    console.error('Error deleting account:', err);
+    alert('❌ Error: ' + err.message);
+    setButtonLoading(false);
+  }
+};
 
   const closeModals = () => {
     setShowFirstModal(false);
