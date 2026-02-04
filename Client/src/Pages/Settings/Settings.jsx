@@ -150,6 +150,10 @@ const handleFinalDelete = async () => {
     const API_URL = import.meta.env.VITE_API;
     const userName = user.userName;
 
+    console.log('🔍 API_URL:', API_URL);
+    console.log('🔍 UserName:', userName);
+    console.log('🔍 Full URL:', `${API_URL}/account/${userName}`);
+
     // Step 1: Delete the account
     const response = await fetch(`${API_URL}/account/${userName}`, {
       method: 'DELETE',
@@ -159,29 +163,39 @@ const handleFinalDelete = async () => {
       credentials: 'include',
     });
 
+    console.log('✅ Delete response status:', response.status);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('❌ Delete failed:', errorText);
+      throw new Error(`Delete failed: ${response.status} - ${errorText}`);
+    }
+
     const data = await response.json();
+    console.log('✅ Delete data:', data);
 
     if (data.success) {
-      // Step 2: Logout properly (same as your working logout)
+      // Step 2: Logout properly
+      console.log('🔍 Calling logout...');
       const logoutResponse = await fetch(`${API_URL}/logout`, {
         method: 'POST',
         credentials: 'include',
       });
       
-      const logoutData = await logoutResponse.json();
+      console.log('✅ Logout response status:', logoutResponse.status);
       
-      // Step 3: Only navigate if logout succeeded
+      const logoutData = await logoutResponse.json();
+      console.log('✅ Logout data:', logoutData);
+      
       if (logoutResponse.ok) {
         alert(`✅ Account deleted successfully.\n\n📊 Details:\n- Deleted ${data.deletedMedia} media files\n- All posts, videos, and messages removed\n- All social connections cleaned up`);
         
-        // Clear any local storage
         localStorage.clear();
         sessionStorage.clear();
         
         navigate('/auth');
       } else {
         console.error('Logout failed:', logoutData.error);
-        // Still navigate even if logout fails
         navigate('/auth');
       }
     } else {
@@ -189,8 +203,11 @@ const handleFinalDelete = async () => {
       setButtonLoading(false);
     }
   } catch (err) {
-    console.error('Error deleting account:', err);
-    alert('❌ Error: ' + err.message);
+    console.error('❌ Full error object:', err);
+    console.error('❌ Error name:', err.name);
+    console.error('❌ Error message:', err.message);
+    
+    alert(`❌ Error: ${err.message}\n\nCheck console for details`);
     setButtonLoading(false);
   }
 };
