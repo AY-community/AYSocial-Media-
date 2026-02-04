@@ -453,6 +453,8 @@ const logoutController = async (req, res) => {
       httpOnly: true,
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       secure: process.env.NODE_ENV === "production",
+      // path: "/" is the default, but add it explicitly to be safe
+      path: "/"
     });
     return res.status(200).json({ message: "Logged out successfully." });
   } catch (err) {
