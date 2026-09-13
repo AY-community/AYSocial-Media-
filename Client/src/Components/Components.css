@@ -28,14 +28,12 @@
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   filter: drop-shadow(0 0 2px rgba(138, 43, 226, 0.5));
-  will-change: stroke-dasharray, stroke-dashoffset;
+  will-change: stroke-dashoffset;
   animation: none;
 }
 
 .qs-animated-logo.qs-ready .qs-animated-path {
-  animation: 
-    qs-dash 3s ease-in-out infinite,
-    qs-spin 3s linear infinite;
+  animation: qs-stroke 2.4s ease-in-out infinite;
 }
 
 .qs-animated-logo.qs-ready .qs-animated-path:nth-child(1) {
@@ -50,27 +48,21 @@
   animation-delay: 0.3s;
 }
 
-@keyframes qs-dash {
+@keyframes qs-stroke {
   0% {
-    stroke-dasharray: 0 1000;
+    stroke-dashoffset: 1000;
+  }
+  40% {
     stroke-dashoffset: 0;
+    fill: none;
   }
-  50% {
-    stroke-dasharray: 1000 0;
-    stroke-dashoffset: -500;
-  }
-  100% {
-    stroke-dasharray: 0 1000;
-    stroke-dashoffset: -1000;
-  }
-}
-
-@keyframes qs-spin {
-  0% {
+  55% {
     stroke-dashoffset: 0;
+    fill: rgba(138, 43, 226, 0.08);
   }
   100% {
     stroke-dashoffset: -1000;
+    fill: none;
   }
 }
 
@@ -107,15 +99,11 @@
 }
 
 .qs-animated-logo.qs-ready .qs-animated-path.qs-fast {
-  animation: 
-    qs-dash 1.5s ease-in-out infinite,
-    qs-spin 1.5s linear infinite;
+  animation: qs-stroke 1.4s ease-in-out infinite;
 }
 
 .qs-animated-logo.qs-ready .qs-animated-path.qs-slow {
-  animation: 
-    qs-dash 4s ease-in-out infinite,
-    qs-spin 4s linear infinite;
+  animation: qs-stroke 3.5s ease-in-out infinite;
 }
 
 .qs-spinner-loader:hover .qs-animated-path {
@@ -123,9 +111,7 @@
 }
 
 .qs-animated-logo.qs-ready .qs-animated-path.qs-once {
-  animation: 
-    qs-dash 2.5s ease-in-out forwards,
-    qs-spin 2.5s linear forwards;
+  animation: qs-stroke 2.4s ease-in-out forwards;
 }
 
 /* Profile Dropdown */

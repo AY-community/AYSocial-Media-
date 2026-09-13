@@ -1,8 +1,9 @@
 @font-face {
   font-family: 'PurpleMagicDEMO-SVG';
-  src: url('./Fonts/Purple Magic DEMO.ttf') format('opentype');
+  src: url('./Fonts/Purple Magic DEMO.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 :root{
