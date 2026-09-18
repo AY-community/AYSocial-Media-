@@ -128,10 +128,12 @@ const userSchema = new mongoose.Schema(
     },
 
     role: {
-  type: String,
-  enum: ['user', 'moderator', 'admin' , 'superadmin'],
-  default: 'user'
-} , 
+      type: String,
+      enum: ['user', 'moderator', 'admin' , 'superadmin'],
+      default: 'user'
+    },
+
+    tokenVersion: { type: Number, default: 0 },
 
     searchHistory: [
       {

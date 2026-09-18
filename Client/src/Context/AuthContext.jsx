@@ -48,10 +48,6 @@ export const AuthProvider = ({ children }) => {
     } else {
       setLoadingUser(false);
     }
-
-    setTimeout(() => {
-      fetchUser();
-    }, 3000);
   }, []);
 
   const updatePrivacySettings = async (settings) => {

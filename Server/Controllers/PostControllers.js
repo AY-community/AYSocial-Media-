@@ -75,7 +75,7 @@ const addPostController = async (req, res) => {
 const toggleLikeController = async (req, res) => {
     try{
         const {postId} = req.body;
-        const {userId} = req.params;
+        const userId = req.user.id;
 
         const post = await Post.findById(postId).populate('user', 'userName');
         if(!post){
@@ -284,9 +284,13 @@ const toggleLikeController = async (req, res) => {
 
 const deletePostController = async(req, res) => {
   try {
-    const { postId , userId } = req.params;
+    const { postId } = req.params;
+    const userId = req.user.id;
 
     const postFoundById = await Post.findById(postId);
+    if (postFoundById && postFoundById.user.toString() !== userId) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
     const user = await User.findById(userId);
 
     if(!user){
@@ -343,6 +347,10 @@ const editPostController = async(req ,res) => {
 
   if(!postFoundById){
     return res.status(404).json({message:"Post not found"})
+  }
+  
+  if (postFoundById.user.toString() !== req.user.id) {
+    return res.status(403).json({ message: "Unauthorized" });
   }
 
   await Post.findByIdAndUpdate(

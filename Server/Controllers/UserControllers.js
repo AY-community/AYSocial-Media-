@@ -444,7 +444,8 @@ const updateProfileController = async (req, res) => {
 
 const toggleFollowController = async (req, res) => {
   try {
-    const { targetUserId, loggedInUserId } = req.params;
+    const { targetUserId } = req.params;
+    const loggedInUserId = req.user.id;
     
     const targetUser = await User.findById(targetUserId);
     const loggedInUser = await User.findById(loggedInUserId);
@@ -910,7 +911,8 @@ const getFollowingController = async (req, res) => {
 
 const removeFollowerController = async (req, res) => {
   try {
-    const { otherUserId, id } = req.params;
+    const { otherUserId } = req.params;
+    const id = req.user.id;
     
     const currentUser = await User.findById(id);
     const otherUser = await User.findById(otherUserId);
@@ -1077,7 +1079,8 @@ const getPendingRequestsController = async (req, res) => {
 
 const acceptRequestController = async (req, res) => {
   try {
-    const { userId, requesterId } = req.params;
+    const { requesterId } = req.params;
+    const userId = req.user.id;
     
     const currentUser = await User.findById(userId);
     const requesterUser = await User.findById(requesterId);
@@ -1158,7 +1161,8 @@ const acceptRequestController = async (req, res) => {
 
 const declineRequestController = async (req, res) => {
   try {
-    const { userId, requesterId } = req.params;
+    const { requesterId } = req.params;
+    const userId = req.user.id;
     
     const currentUser = await User.findById(userId);
     const requesterUser = await User.findById(requesterId);
@@ -1243,9 +1247,10 @@ const changePasswordController = async(req, res) => {
     const newPasswordHash = await bcrypt.hash(newPassword, salt);
     
     user.password = newPasswordHash;
+    user.tokenVersion += 1; // Invalidate all active sessions across all devices
     await user.save();
     
-    return res.status(200).json({ message: "Password updated successfully." });
+    return res.status(200).json({ message: "Password updated successfully. Please log in again." });
 
   } catch (error) {
     console.error("Error changing password:", error);

@@ -22,7 +22,7 @@ const { addPostController
      } = require("../Controllers/PostControllers");
 
 
- router.post("/add-post/:userName" , upload.array("images", 4)  , addPostController)
+ router.post("/add-post/:userName" , decodeToken, upload.array("images", 4)  , addPostController)
 
  router.get('/posts/:userName', getPostController);
 
@@ -31,29 +31,29 @@ const { addPostController
 
 
 
- router.post("/posts/toggle-like/:userId/", toggleLikeController);
+ router.post("/posts/toggle-like/:userId/", decodeToken, toggleLikeController);
 
- router.delete("/posts/:postId/:userId" , deletePostController)
+ router.delete("/posts/:postId/:userId" , decodeToken, deletePostController)
 
- router.put("/edit-post/:postId" , editPostController)
+ router.put("/edit-post/:postId" , decodeToken, editPostController)
 
- router.post("/posts/add-comment" , addCommentController)
+ router.post("/posts/add-comment" , decodeToken, addCommentController)
 
  router.get("/posts/get-comments/:postId/:userId" , getCommentsController)
 
- router.post("/posts/toggle-like-comment/:userId" , toggleLikeCommentController )
+ router.post("/posts/toggle-like-comment/:userId" , decodeToken, toggleLikeCommentController )
 
- router.delete("/posts/delete-comment/:postId/:commentId" , deleteCommentController)
+ router.delete("/posts/delete-comment/:postId/:commentId" , decodeToken, deleteCommentController)
 
- router.post("/posts/add-reply/:postId/:commentId" , addReplyController)
+ router.post("/posts/add-reply/:postId/:commentId" , decodeToken, addReplyController)
 
- router.delete("/posts/delete-reply/:postId/:commentId/:replyId" , deleteReplyController)
+ router.delete("/posts/delete-reply/:postId/:commentId/:replyId" , decodeToken, deleteReplyController)
 
- router.post("/posts/toggle-like-reply/:postId/:commentId/:replyId" , toggleLikeReplyController)
+ router.post("/posts/toggle-like-reply/:postId/:commentId/:replyId" , decodeToken, toggleLikeReplyController)
 
   router.get("/posts/like-status/:postId/:userId" , fetchLikeStatusController)
 
-  router.post("/posts/toggle-save/:userId" , toggleSaveController)
+  router.post("/posts/toggle-save/:userId" , decodeToken, toggleSaveController)
 
   router.get("/shared-post/:postId/:userId" , getSharedPostController)
 

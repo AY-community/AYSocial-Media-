@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const decodeToken = require("../Middlewares/DecodeToken.js");
+const isAdmin = require("../Middlewares/IsAdmin.js");
 const {getMyProfileController , getOtherProfileController , updateProfileController , toggleFollowController , getFollowersController, getFollowingController , removeFollowerController , getSuggestedUsersController , changePasswordController , updatePrivacySettingsController ,getPendingRequestsController,acceptRequestController,declineRequestController, blockUserController, unblockUserController, getBlocksController  , getUserByIdController ,  banUserController
     , getAllUsers , searchUsers , getHighRoleUsers , promoteUser , demoteUser}  = require("../Controllers/UserControllers");
 
@@ -14,13 +15,13 @@ router.get("/edit/:userName" , getOtherProfileController);
 
 router.put("/edit/:userName", updateProfileController );
 
-router.post("/toggle-follow-status/:targetUserId/:loggedInUserId" , toggleFollowController)
+router.post("/toggle-follow-status/:targetUserId/:loggedInUserId" , decodeToken, toggleFollowController)
 
 router.get("/get-followers/:userId",  getFollowersController )
 
 router.get("/get-following/:userId",  getFollowingController )
 
-router.delete('/remove-follower/:otherUserId/:id', removeFollowerController);
+router.delete('/remove-follower/:otherUserId/:id', decodeToken, removeFollowerController);
 
 router.get('/suggested-users/:userId', getSuggestedUsersController);
 
@@ -35,21 +36,21 @@ router.get('/blocks', decodeToken, getBlocksController);
 
 router.get("/follow-requests/:userId" , getPendingRequestsController )
 
-router.post("/follow-requests/accept/:userId/:requesterId", acceptRequestController);
+router.post("/follow-requests/accept/:userId/:requesterId", decodeToken, acceptRequestController);
 
-router.post("/follow-requests/decline/:userId/:requesterId", declineRequestController);
+router.post("/follow-requests/decline/:userId/:requesterId", decodeToken, declineRequestController);
 
-router.delete('/account/:userNameId', banUserController);
+router.delete('/account/:userNameId', decodeToken, isAdmin, banUserController);
 
 router.get('/all-users', getAllUsers);
 
 router.get('/search-users', searchUsers);
 
-router.get('/admin/high-role-users', getHighRoleUsers);
+router.get('/admin/high-role-users', decodeToken, isAdmin, getHighRoleUsers);
 
-router.patch( '/admin/promote-user', promoteUser);
+router.patch( '/admin/promote-user', decodeToken, isAdmin, promoteUser);
 
-router.patch( '/admin/demote-user/:username', demoteUser);
+router.patch( '/admin/demote-user/:username', decodeToken, isAdmin, demoteUser);
 
 
 module.exports = router;

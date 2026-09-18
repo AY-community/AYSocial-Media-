@@ -2,6 +2,7 @@ const router = require("express").Router();
 const isLogout = require("../Middlewares/IsLougout");
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const { loginLimiter, signupLimiter, otpLimiter } = require("../Middlewares/RateLimiter");
 
 const {
   signUpController,
@@ -16,14 +17,14 @@ const {
 } = require("../Controllers/AuthControllers");
 
 // Auth flow
-router.post("/signup", signUpController);
+router.post("/signup", signupLimiter, signUpController);
 router.get("/verify/:token", verifyController);
-router.post("/login", loginController);
+router.post("/login", loginLimiter, loginController);
 router.post("/logout", logoutController);
 
 // Password Reset flow
-router.post("/send-otp", otpSendController);
-router.post("/confirm-otp", otpConfirmController);
+router.post("/send-otp", otpLimiter, otpSendController);
+router.post("/confirm-otp", otpLimiter, otpConfirmController);
 router.post("/reset-password", resetPasswordController);
 
 // Additional onboarding
@@ -53,7 +54,7 @@ router.get('/auth/google/callback',
       const user = req.user;
 
       const token = jwt.sign(
-        { id: user._id, email: user.email },
+        { id: user._id, email: user.email, tokenVersion: user.tokenVersion || 0 },
         process.env.JWT_SECRET,
         { expiresIn: '2d' }
       );

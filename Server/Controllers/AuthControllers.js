@@ -80,9 +80,8 @@ const signUpController = async (req, res) => {
       await User.deleteOne({ userName });
     }
 
-    // Get IP address from request
-    let ip =
-      req.headers["x-forwarded-for"]?.split(",")[0] || req.socket.remoteAddress;
+    // Get IP address from request (secured via trust proxy)
+    let ip = req.ip;
 
     // Use a fallback IP for development/testing environment
     if (process.env.NODE_ENV !== "production") {
@@ -197,7 +196,7 @@ const loginController = async (req, res) => {
           });
         } else {
           const token = jwt.sign(
-            { id: userFound._id, email: userFound.email },
+            { id: userFound._id, email: userFound.email, tokenVersion: userFound.tokenVersion },
             process.env.JWT_SECRET,
             { expiresIn: "2d" }
           );
@@ -236,9 +235,10 @@ const otpSendController = async (req, res) => {
     const userFound = await User.findOne({ email });
 
     if (!userFound || userFound.verification === false) {
+      // Generic response — don't reveal if the email exists or not
       return res
-        .status(400)
-        .json({ error: "Email is incorrect or doesn't exist, try again" });
+        .status(200)
+        .json({ message: "If that email is registered, an OTP has been sent." });
     }
 
     if (userFound.otpExpires && userFound.otpExpires > Date.now()) {
@@ -368,6 +368,7 @@ const resetPasswordController = async (req, res) => {
     userFoundPerToken.password = hashedPassword;
     userFoundPerToken.resetToken = undefined;
     userFoundPerToken.resetTokenExpire = undefined;
+    userFoundPerToken.tokenVersion += 1; // Invalidate all existing sessions after password reset
 
     await userFoundPerToken.save();
 
@@ -449,11 +450,18 @@ const checkAuthStatus = async (req, res) => {
 
 const logoutController = async (req, res) => {
   try {
+    // Increment tokenVersion to invalidate all sessions globally
+    if (req.cookies?.token) {
+      try {
+        const jwt = require("jsonwebtoken");
+        const decoded = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
+        await User.findByIdAndUpdate(decoded.id, { $inc: { tokenVersion: 1 } });
+      } catch (_) { /* token may already be invalid, that's fine */ }
+    }
     res.clearCookie("token", {
       httpOnly: true,
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       secure: process.env.NODE_ENV === "production",
-      // path: "/" is the default, but add it explicitly to be safe
       path: "/"
     });
     return res.status(200).json({ message: "Logged out successfully." });
