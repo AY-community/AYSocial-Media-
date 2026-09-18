@@ -10,6 +10,7 @@ export default function OtpModal({ toggleModal }) {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [otpSent, setOtpSent] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [infoMessage, setInfoMessage] = useState(
     t("enter email for otp")
   );
@@ -59,25 +60,30 @@ export default function OtpModal({ toggleModal }) {
   /* Verify OTP Api*/
   const handleAction = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    if (!isSent) {
-      await SendOtp();
-    } else {
-      const res = await fetch(`${import.meta.env.VITE_API}/confirm-otp`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, otp }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        const resetToken = data.token;
-        setSuccess(t("otp verified success"));
-        setError(null);
-        toggleModal("reset", email, resetToken);
+    try {
+      if (!isSent) {
+        await SendOtp();
       } else {
-        setError(data.error);
-        setSuccess(null);
+        const res = await fetch(`${import.meta.env.VITE_API}/confirm-otp`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, otp }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          const resetToken = data.token;
+          setSuccess(t("otp verified success"));
+          setError(null);
+          toggleModal("reset", email, resetToken);
+        } else {
+          setError(data.error);
+          setSuccess(null);
+        }
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -134,7 +140,9 @@ export default function OtpModal({ toggleModal }) {
       </span>
 
       <div>
-        <button className="main-button">{isSent ? t("verify") : t("send")}</button>
+        <button className="main-button" disabled={isLoading}>
+          {isLoading ? "..." : (isSent ? t("verify") : t("send"))}
+        </button>
       </div>
     </form>
   );

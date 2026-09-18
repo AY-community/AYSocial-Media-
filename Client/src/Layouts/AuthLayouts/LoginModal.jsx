@@ -12,6 +12,7 @@ export default function LoginModal({ toggleModal, success }) {
   const [loginSuccess, setLoginSuccess] = useState(null);
   const [completionMessage, setCompletionMessage] = useState(success);
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { setUser } = useAuth();
   let messageContent;
@@ -44,6 +45,7 @@ export default function LoginModal({ toggleModal, success }) {
   async function handleLogin(e) {
     try {
       e.preventDefault();
+      setIsLoading(true);
       const formData = new FormData(e.target);
       const data = Object.fromEntries(formData.entries());
 
@@ -93,6 +95,8 @@ export default function LoginModal({ toggleModal, success }) {
       }
     } catch (error) {
       setError(t("loginErrorOccurred"));
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -125,7 +129,9 @@ export default function LoginModal({ toggleModal, success }) {
       <Link className="forgot-password" onClick={() => toggleModal("otp")}>
         {t("forgotPassword")}
       </Link>
-      <button className="main-button">{t("log In")}</button>
+      <button className="main-button" disabled={isLoading}>
+        {isLoading ? "..." : t("log In")}
+      </button>
     </form>
   );
 }

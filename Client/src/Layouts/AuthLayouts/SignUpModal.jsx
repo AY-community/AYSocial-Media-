@@ -7,6 +7,7 @@ export default function SignUpModal({ toggleModal }) {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   let messageContent;
 
   if (success) {
@@ -22,8 +23,20 @@ export default function SignUpModal({ toggleModal }) {
   async function SignUpApi(e) {
     try {
       e.preventDefault();
+      setIsLoading(true);
       const formData = new FormData(e.target);
       const data = Object.fromEntries(formData.entries());
+
+      if (data.password.length < 6 || data.password.length > 20) {
+        setError(t("Password must be between 6 and 20 characters") || "Password must be between 6 and 20 characters");
+        return;
+      }
+      
+      const isStrongPassword = (pass) => /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^\w\s]).+$/.test(pass);
+      if (!isStrongPassword(data.password)) {
+        setError(t("Password must contain at least one letter, one number, and one special character") || "Password must contain at least one letter, one number, and one special character");
+        return;
+      }
 
       const response = await fetch(`${import.meta.env.VITE_API}/signup`, {
         method: "POST",
@@ -46,6 +59,8 @@ export default function SignUpModal({ toggleModal }) {
       }
     } catch (error) {
       console.error("Error during signup:", error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -81,7 +96,9 @@ export default function SignUpModal({ toggleModal }) {
       <span className="right-reserved">
         {t("by signing up, you agree to the terms of service and privacy policy")}
       </span>
-      <button className="main-button">{t("sign up")} </button>
+      <button className="main-button" disabled={isLoading}>
+        {isLoading ? "..." : t("sign up")} 
+      </button>
     </form>
   );
 }

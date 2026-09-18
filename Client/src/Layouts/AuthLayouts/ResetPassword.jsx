@@ -8,6 +8,7 @@ export default function ResetModal({ toggleModal, email, token }) {
   const [success, setSuccess] = useState(null);
   const [showPassword1, setShowPassword1] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [infoMessage, setInfoMessage] = useState(
     t("enter your new password to reset it")
   );
@@ -26,23 +27,44 @@ export default function ResetModal({ toggleModal, email, token }) {
 
   const ResetFetchApi = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const newPassword = formData.get("newPassword");
-    const confirmNewPassword = formData.get("confirmNewPassword");
-    const res = await fetch(`${import.meta.env.VITE_API}/reset-password`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ newPassword, confirmNewPassword, token }),
-    });
-    const data = await res.json();
-    if (res.ok) {
-      toggleModal("login");
-      e.target.reset();
-      setSuccess(data.message);
-      setError(null);
-    } else {
-      setError(data.error);
-      setSuccess(null);
+    setIsLoading(true);
+    try {
+      const formData = new FormData(e.target);
+      const newPassword = formData.get("newPassword");
+      const confirmNewPassword = formData.get("confirmNewPassword");
+
+      if (newPassword !== confirmNewPassword) {
+        setError(t("The inputs below don't match, check and try again") || "The inputs below don't match, check and try again");
+        return;
+      }
+
+      if (newPassword.length < 6 || newPassword.length > 20) {
+        setError(t("Password must be between 6 and 20 characters") || "Password must be between 6 and 20 characters");
+        return;
+      }
+
+      const isStrongPassword = (pass) => /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^\w\s]).+$/.test(pass);
+      if (!isStrongPassword(newPassword)) {
+        setError(t("Password must contain at least one letter, one number, and one special character") || "Password must contain at least one letter, one number, and one special character");
+        return;
+      }
+      const res = await fetch(`${import.meta.env.VITE_API}/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newPassword, confirmNewPassword, token }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        toggleModal("login");
+        e.target.reset();
+        setSuccess(data.message);
+        setError(null);
+      } else {
+        setError(data.error);
+        setSuccess(null);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -99,8 +121,8 @@ export default function ResetModal({ toggleModal, email, token }) {
         </div>{" "}
         <p></p>
       </div>
-      <button className="main-button" style={{ marginBottom: "25px" }}>
-        {t("reset")}
+      <button className="main-button" style={{ marginBottom: "25px" }} disabled={isLoading}>
+        {isLoading ? "..." : t("reset")}
       </button>
     </form>
   );
