@@ -148,9 +148,8 @@ const handleFinalDelete = async () => {
     setButtonLoading(true);
 
     const API_URL = import.meta.env.VITE_API;
-    const userName = user.userName;
 
-    const response = await fetch(`${API_URL}/account/${userName}`, {
+    const response = await fetch(`${API_URL}/account`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -166,24 +165,9 @@ const handleFinalDelete = async () => {
     const data = await response.json();
 
     if (data.success) {
-      const logoutResponse = await fetch(`${API_URL}/logout`, {
-        method: 'POST',
-        credentials: 'include',
-      });
-      
-      const logoutData = await logoutResponse.json();
-      
-      if (logoutResponse.ok) {
-        alert(`✅ Account deleted successfully.\n\n📊 Details:\n- Deleted ${data.deletedMedia} media files\n- All posts, videos, and messages removed\n- All social connections cleaned up`);
-        
-        localStorage.clear();
-        sessionStorage.clear();
-        
-        navigate('/auth');
-      } else {
-        console.error('Logout failed:', logoutData.error);
-        navigate('/auth');
-      }
+      localStorage.clear();
+      sessionStorage.clear();
+      navigate('/auth');
     } else {
       alert('❌ Failed to delete account: ' + data.error);
       setButtonLoading(false);

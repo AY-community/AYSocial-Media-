@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const decodeToken = require("../Middlewares/DecodeToken.js");
 const isAdmin = require("../Middlewares/IsAdmin.js");
-const {getMyProfileController , getOtherProfileController , updateProfileController , toggleFollowController , getFollowersController, getFollowingController , removeFollowerController , getSuggestedUsersController , changePasswordController , updatePrivacySettingsController ,getPendingRequestsController,acceptRequestController,declineRequestController, blockUserController, unblockUserController, getBlocksController  , getUserByIdController ,  banUserController
+const {getMyProfileController , getOtherProfileController , updateProfileController , toggleFollowController , getFollowersController, getFollowingController , removeFollowerController , getSuggestedUsersController , changePasswordController , updatePrivacySettingsController ,getPendingRequestsController,acceptRequestController,declineRequestController, blockUserController, unblockUserController, getBlocksController  , getUserByIdController ,  banUserController, deleteMyAccountController
     , getAllUsers , searchUsers , getHighRoleUsers , promoteUser , demoteUser}  = require("../Controllers/UserControllers");
 
 router.get("/me", decodeToken , getMyProfileController)
@@ -40,7 +40,11 @@ router.post("/follow-requests/accept/:userId/:requesterId", decodeToken, acceptR
 
 router.post("/follow-requests/decline/:userId/:requesterId", decodeToken, declineRequestController);
 
+// Admin: ban/delete any user by userName
 router.delete('/account/:userNameId', decodeToken, isAdmin, banUserController);
+
+// User: delete own account from Settings (no isAdmin needed)
+router.delete('/account', decodeToken, deleteMyAccountController);
 
 router.get('/all-users', getAllUsers);
 

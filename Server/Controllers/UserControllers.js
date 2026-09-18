@@ -1738,6 +1738,94 @@ const banUserController = async (req, res) => {
   }
 };
 
+// ========================================
+// USER: Delete Own Account (from Settings)
+// ========================================
+const deleteMyAccountController = async (req, res) => {
+  try {
+    const actualUserId = req.user.id; // Always from JWT — never from URL
+    const user = await User.findById(actualUserId);
+    if (!user) {
+      return res.status(404).json({ success: false, error: "User not found" });
+    }
+
+    const userName = user.userName;
+    console.log(`Self-deletion requested for user: ${userName} (${actualUserId})`);
+
+    // STEP 1: Collect all media to delete from Cloudinary
+    const mediaToDelete = [];
+    if (user.profilePic) mediaToDelete.push(user.profilePic);
+    if (user.coverPic) mediaToDelete.push(user.coverPic);
+
+    const userPosts = await Post.find({ user: actualUserId });
+    for (const post of userPosts) {
+      if (post.image) mediaToDelete.push(post.image);
+      if (post.video) mediaToDelete.push(post.video);
+    }
+
+    const userVideos = await Video.find({ user: actualUserId });
+    for (const video of userVideos) {
+      if (video.videoUrl) mediaToDelete.push(video.videoUrl);
+      if (video.thumbnail) mediaToDelete.push(video.thumbnail);
+    }
+
+    // STEP 2: Delete media from Cloudinary
+    await Promise.all(mediaToDelete.map((url) => deleteFromCloudinary(url)));
+
+    // STEP 3: Cascade delete from DB
+    await Post.deleteMany({ user: actualUserId });
+    await Video.deleteMany({ user: actualUserId });
+    await Notification.deleteMany({ $or: [{ recipient: actualUserId }, { sender: actualUserId }] });
+    await Notification.updateMany({ actors: actualUserId }, { $pull: { actors: actualUserId } });
+    await Message.deleteMany({ participants: { $size: 2, $all: [actualUserId] } });
+    await Message.updateMany(
+      { participants: actualUserId },
+      { $pull: { participants: actualUserId, settings: { userId: actualUserId } } }
+    );
+    await Post.updateMany({ "likes.user": actualUserId }, { $pull: { likes: { user: actualUserId } } });
+    await Post.updateMany({ "comments.user": actualUserId }, { $pull: { comments: { user: actualUserId } } });
+    await Video.updateMany({ "likes.user": actualUserId }, { $pull: { likes: { user: actualUserId } } });
+    await Video.updateMany({ "comments.user": actualUserId }, { $pull: { comments: { user: actualUserId } } });
+    await User.updateMany(
+      { "followers.follower": actualUserId },
+      { $pull: { followers: { follower: actualUserId } }, $inc: { followersCount: -1 } }
+    );
+    await User.updateMany(
+      { "following.following": actualUserId },
+      { $pull: { following: { following: actualUserId } }, $inc: { followingCount: -1 } }
+    );
+    await User.updateMany(
+      { "pendingFollowRequests.requester": actualUserId },
+      { $pull: { pendingFollowRequests: { requester: actualUserId } } }
+    );
+    await User.updateMany(
+      { "sentFollowRequests.recipient": actualUserId },
+      { $pull: { sentFollowRequests: { recipient: actualUserId } } }
+    );
+    await User.updateMany({ blockedUsers: actualUserId }, { $pull: { blockedUsers: actualUserId } });
+    await User.updateMany({ blockedBy: actualUserId }, { $pull: { blockedBy: actualUserId } });
+    await User.updateMany(
+      {},
+      {
+        $pull: {
+          savedPosts: { post: { $in: userPosts.map(p => p._id) } },
+          savedVideos: { video: { $in: userVideos.map(v => v._id) } },
+        },
+      }
+    );
+
+    // STEP 4: Delete account & clear cookie
+    await User.findByIdAndDelete(actualUserId);
+    res.clearCookie("token", { httpOnly: true, sameSite: "strict", secure: true });
+
+    console.log(`Self-deletion completed for user: ${userName}`);
+    return res.status(200).json({ success: true, message: "Your account has been deleted successfully." });
+  } catch (err) {
+    console.error("Error in deleteMyAccountController:", err);
+    return res.status(500).json({ success: false, error: err.message });
+  }
+};
+
 const getAllUsers = async (req, res) => {
   try {
     const {
@@ -2161,6 +2249,7 @@ module.exports = {
   getBlocksController,
   getUserByIdController,
   banUserController,
+  deleteMyAccountController,
   getAllUsers,
   searchUsers,
   getHighRoleUsers ,
