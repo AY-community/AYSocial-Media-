@@ -22,7 +22,9 @@ const createRateLimitMiddleware = (limiter, label) => {
     try {
       // req.ip is safe now because we set 'trust proxy' in server.js
       const ip = req.ip || "anonymous";
+      console.log(`[RateLimiter] Checking limit for IP: ${ip} | Label: ${label}`);
       const { success, remaining, reset } = await limiter.limit(ip);
+      console.log(`[RateLimiter] Result -> Success: ${success}, Remaining: ${remaining}`);
 
       // Always send back rate limit headers so the frontend can react
       res.setHeader("X-RateLimit-Remaining", remaining);
@@ -41,7 +43,7 @@ const createRateLimitMiddleware = (limiter, label) => {
       next();
     } catch (err) {
       // If Redis is down, fail open (don't block users) but log the issue
-      console.error("Rate limiter error:", err.message);
+      console.error("[RateLimiter FATAL ERROR]:", err);
       next();
     }
   };
