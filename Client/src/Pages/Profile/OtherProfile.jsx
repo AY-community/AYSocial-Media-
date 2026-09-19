@@ -25,6 +25,81 @@ import { SkeletonCard } from "../../Components/Post&Video/SkeletonCard";
 import { useTranslation } from "react-i18next";
 import SEO from '../../Utils/SEO';
 
+const countryAliasMap = {
+  "usa": "United States of America",
+  "us": "United States of America",
+  "u s a": "United States of America",
+  "u.s.a": "United States of America",
+  "u s": "United States of America",
+  "uk": "United Kingdom",
+  "united kingdom": "United Kingdom",
+  "great britain": "United Kingdom",
+  "uae": "United Arab Emirates",
+  "south korea": "South Korea",
+  "north korea": "North Korea",
+  "the netherlands": "Netherlands",
+  "czech republic": "Czech Republic",
+  "dr congo": "Democratic Republic of the Congo",
+  "democratic republic of the congo": "Democratic Republic of the Congo",
+  "russia": "Russian Federation",
+};
+
+const normalizeCountryName = (countryName) => {
+  if (!countryName || typeof countryName !== "string") return null;
+
+  const trimmedName = countryName.trim();
+  if (!trimmedName || trimmedName.toLowerCase() === "unknown") return null;
+
+  const normalizedKey = trimmedName.toLowerCase().replace(/\./g, "").replace(/\s+/g, " ").trim();
+  return countryAliasMap[normalizedKey] || trimmedName;
+};
+
+const getCountryFlagUrl = async (countryName) => {
+  const normalizedName = normalizeCountryName(countryName);
+  if (!normalizedName) return "🌐";
+
+  try {
+    const lookupUrl = `https://restcountries.com/v3.1/name/${encodeURIComponent(normalizedName)}?fullText=false`;
+    const response = await fetch(lookupUrl);
+
+    if (!response.ok) {
+      return "🌐";
+    }
+
+    const data = await response.json();
+    const match = Array.isArray(data) ? data[0] : null;
+    if (match?.flags?.png || match?.flags?.svg) {
+      return match.flags.png || match.flags.svg;
+    }
+
+    const allResponse = await fetch("https://restcountries.com/v3.1/all");
+    if (!allResponse.ok) {
+      return "🌐";
+    }
+
+    const allCountries = await allResponse.json();
+    const normalizedTarget = normalizeCountryName(normalizedName)?.toLowerCase();
+
+    const fallbackMatch = allCountries.find((country) => {
+      const aliases = [
+        country?.name?.common,
+        country?.name?.official,
+        ...(country?.altSpellings || [])
+      ].filter(Boolean).map((value) => normalizeCountryName(value)?.toLowerCase());
+
+      return aliases.includes(normalizedTarget);
+    });
+
+    if (fallbackMatch?.flags?.png || fallbackMatch?.flags?.svg) {
+      return fallbackMatch.flags.png || fallbackMatch.flags.svg;
+    }
+
+    return "🌐";
+  } catch (error) {
+    return "🌐";
+  }
+};
+
 export default function OtherProfile({ userData, loading }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -197,25 +272,7 @@ export default function OtherProfile({ userData, loading }) {
   }, [postId, videoId, location.pathname, userName, user._id, navigate]);
 
   const getCountryFlag = useCallback(async (countryName) => {
-    if (!countryName || countryName === "Unknown" || countryName === "unknown") return "🏳️";
-
-    try {
-      const cleanName = countryName.trim();
-      const response = await fetch(
-        `https://restcountries.com/v3.1/name/${encodeURIComponent(
-          cleanName
-        )}?fullText=false`
-      );
-
-      if (!response.ok) {
-        return "🏳️";
-      }
-
-      const data = await response.json();
-      return data[0]?.flags?.png || data[0]?.flags?.svg || "🏳️";
-    } catch (error) {
-      return "🏳️";
-    }
+    return await getCountryFlagUrl(countryName);
   }, []);
 
   useEffect(() => {
@@ -619,7 +676,9 @@ export default function OtherProfile({ userData, loading }) {
                         }}
                         onError={(e) => {
                           e.target.style.display = "none";
-                          e.target.nextSibling.style.display = "inline";
+                          if (e.target.nextSibling) {
+                            e.target.nextSibling.style.display = "inline";
+                          }
                         }}
                       />
                     ) : (

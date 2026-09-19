@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const otpGenerator = require("otp-generator");
 const sendMail = require("../Config/EmailSend");
 const { GetEmailTemplate } = require("../Templates/EmailTemplate");
+const { getCountryFromRequest } = require("../Utils/getCountryFromRequest");
 
 const signUpController = async (req, res) => {
   try {
@@ -77,8 +78,8 @@ const signUpController = async (req, res) => {
       await User.deleteOne({ userName });
     }
 
-    // Country is detected client-side (browser's real IP bypasses Render's proxy)
-    const countryName = (clientCountry && clientCountry !== "Unknown") ? clientCountry : "Unknown";
+    const serverCountry = getCountryFromRequest(req);
+    const countryName = serverCountry || "Unknown";
 
     const verificationToken = crypto.randomBytes(32).toString("hex");
     const hashedPassword = await bcrypt.hash(password, 10);

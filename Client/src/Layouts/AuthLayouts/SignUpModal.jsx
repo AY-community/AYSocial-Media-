@@ -38,14 +38,7 @@ export default function SignUpModal({ toggleModal }) {
         return;
       }
 
-      // Detect country from browser's real IP (no proxy issues)
-      try {
-        const geoRes = await fetch("https://ip-api.com/json?fields=country");
-        const geoData = await geoRes.json();
-        if (geoData?.country) data.country = geoData.country;
-      } catch {
-        data.country = "Unknown";
-      }
+      delete data.country;
 
       const response = await fetch(`${import.meta.env.VITE_API}/signup`, {
         method: "POST",

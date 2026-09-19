@@ -4,6 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const { loginLimiter, signupLimiter, otpLimiter } = require("../Middlewares/RateLimiter");
+const { getCountryFromRequest } = require("../Utils/getCountryFromRequest");
 
 const {
   signUpController,
@@ -54,16 +55,12 @@ router.get('/auth/google/callback',
     try {
       const user = req.user;
 
-      // Set country if not already set (new OAuth users have no country)
+      // Set country if not already set (server-side lookup from actual request IP)
       if (!user.country || user.country === "Unknown") {
         try {
-          // X-Forwarded-For contains the real client IP as the first entry
-          const forwardedFor = req.headers['x-forwarded-for'];
-          const realIp = forwardedFor ? forwardedFor.split(',')[0].trim() : req.ip;
-          const ip = (process.env.NODE_ENV !== "production") ? "8.8.8.8" : realIp;
-          const geoRes = await axios.get(`http://ip-api.com/json/${ip}?fields=country`, { timeout: 3000 });
-          if (geoRes.data?.country) {
-            user.country = geoRes.data.country;
+          const detectedCountry = getCountryFromRequest(req);
+          if (detectedCountry) {
+            user.country = detectedCountry;
             await user.save();
           }
         } catch (geoErr) {
