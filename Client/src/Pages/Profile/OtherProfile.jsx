@@ -690,6 +690,9 @@ export default function OtherProfile({ userData, loading }) {
                       </div>
                     )}
                   </div>
+                  {userData.bio ? (
+                    <p className="profile-bio">{userData.bio}</p>
+                  ) : null}
                   <div className="profile-stats">
                     <div
                       className="stat"
@@ -715,9 +718,6 @@ export default function OtherProfile({ userData, loading }) {
                       <span className="stat-label">{t("Content")}</span>
                     </div>
                   </div>
-                  {userData.bio ? (
-                    <p className="profile-bio">{userData.bio}</p>
-                  ) : null}
                   <div className="profile-actions" style={{ position: 'relative' }}>
                     <button
                       className={getFollowButtonClass()}

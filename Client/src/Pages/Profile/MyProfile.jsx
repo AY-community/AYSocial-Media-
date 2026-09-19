@@ -729,6 +729,10 @@ export default function MyProfile({ userData, loading }) {
                     )}
                   </div>
 
+                  {userData.bio ? (
+                    <p className="profile-bio">{userData.bio}</p>
+                  ) : null}
+
                   <div className="profile-stats">
                     <div
                       className="stat"
@@ -755,9 +759,6 @@ export default function MyProfile({ userData, loading }) {
                     </div>
                   </div>
 
-                  {userData.bio ? (
-                    <p className="profile-bio">{userData.bio}</p>
-                  ) : null}
                   <div className="profile-actions">
                     <button
                       className="btn btn-primary"
