@@ -251,6 +251,8 @@ export default function Profile() {
           name: user?.name || "",
           userName: user?.userName,
           gender: user?.gender || "",
+          website: user?.website || "",
+          jobs: user?.jobs || [],
           location: user?.country,
 
           posts: posts,
@@ -298,6 +300,8 @@ export default function Profile() {
           name: otherUser?.name || "",
           userName: otherUser?.userName,
           gender: otherUser?.gender || "",
+          website: otherUser?.website || "",
+          jobs: otherUser?.jobs || [],
           isPrivate: otherUser?.isPrivate || false,
           isFollowing: otherUser?.isFollowing || false,
           isFollowingBack: otherUser?.isFollowingBack || false,

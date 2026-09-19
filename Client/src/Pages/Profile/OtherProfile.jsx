@@ -639,34 +639,57 @@ export default function OtherProfile({ userData, loading }) {
                       {userData.createdAtYear}{" "}
                     </span>
                   </p>
-                  <p className="profile-location">
-                    <MapPin size={18} weight="fill" color="#6b7280" />
-                    {flagUrl !== "🌐" && flagUrl !== "🏳️" ? (
-                      <img
-                        src={flagUrl}
-                        alt={`${userData.location} flag`}
-                        style={{
-                          width: "20px",
-                          height: "15px",
-                          objectFit: "cover",
-                          borderRadius: "2px",
-                          border: "1px solid #e5e7eb",
-                          marginRight: "5px",
-                        }}
-                        onError={(e) => {
-                          e.target.style.display = "none";
-                          if (e.target.nextSibling) {
-                            e.target.nextSibling.style.display = "inline";
-                          }
-                        }}
-                      />
-                    ) : (
-                      <span style={{ fontSize: "16px", marginRight: "5px" }}>
-                        {flagUrl}
-                      </span>
+                  <div className="profile-meta-stack">
+                    <p className="profile-location">
+                      <MapPin size={18} weight="fill" color="#6b7280" />
+                      {flagUrl !== "🌐" && flagUrl !== "🏳️" ? (
+                        <img
+                          src={flagUrl}
+                          alt={`${userData.location} flag`}
+                          style={{
+                            width: "20px",
+                            height: "15px",
+                            objectFit: "cover",
+                            borderRadius: "2px",
+                            border: "1px solid #e5e7eb",
+                            marginRight: "5px",
+                          }}
+                          onError={(e) => {
+                            e.target.style.display = "none";
+                            if (e.target.nextSibling) {
+                              e.target.nextSibling.style.display = "inline";
+                            }
+                          }}
+                        />
+                      ) : (
+                        <span style={{ fontSize: "16px", marginRight: "5px" }}>
+                          {flagUrl}
+                        </span>
+                      )}
+                      <span>{userData.location || "Unknown"}</span>
+                    </p>
+
+                    {userData.website && (
+                      <a
+                        href={userData.website.startsWith("http") ? userData.website : `https://${userData.website}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="profile-link-chip"
+                      >
+                        {userData.website.replace(/^https?:\/\//i, "").replace(/\/$/, "")}
+                      </a>
                     )}
-                    <span>{userData.location || "Unknown"}</span>
-                  </p>
+
+                    {userData.jobs && userData.jobs.length > 0 && (
+                      <div className="profile-job-list">
+                        {userData.jobs.slice(0, 3).map((job, index) => (
+                          <span key={job._id || job.value || `${job.label}-${index}`} className="profile-job-chip">
+                            {job.label || job.value || job}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                   <div className="profile-stats">
                     <div
                       className="stat"
