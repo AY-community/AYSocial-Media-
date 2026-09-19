@@ -31,11 +31,20 @@ export default function SignUpModal({ toggleModal }) {
         setError(t("Password must be between 6 and 20 characters") || "Password must be between 6 and 20 characters");
         return;
       }
-      
+
       const isStrongPassword = (pass) => /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^\w\s]).+$/.test(pass);
       if (!isStrongPassword(data.password)) {
         setError(t("Password must contain at least one letter, one number, and one special character") || "Password must contain at least one letter, one number, and one special character");
         return;
+      }
+
+      // Detect country from browser's real IP (no proxy issues)
+      try {
+        const geoRes = await fetch("https://ip-api.com/json?fields=country");
+        const geoData = await geoRes.json();
+        if (geoData?.country) data.country = geoData.country;
+      } catch {
+        data.country = "Unknown";
       }
 
       const response = await fetch(`${import.meta.env.VITE_API}/signup`, {

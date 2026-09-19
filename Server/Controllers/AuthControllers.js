@@ -4,13 +4,12 @@ const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const otpGenerator = require("otp-generator");
-const axios = require("axios");
 const sendMail = require("../Config/EmailSend");
 const { GetEmailTemplate } = require("../Templates/EmailTemplate");
 
 const signUpController = async (req, res) => {
   try {
-    let { userName, email, password } = req.body;
+    let { userName, email, password, country: clientCountry } = req.body;
     userName = userName?.trim().toLowerCase();
     email = email?.trim();
     password = password?.trim();
@@ -78,25 +77,8 @@ const signUpController = async (req, res) => {
       await User.deleteOne({ userName });
     }
 
-    // Get IP address from request (secured via trust proxy)
-    let ip = req.ip;
-
-    // Use a fallback IP for development/testing environment
-    if (process.env.NODE_ENV !== "production") {
-      ip = "8.8.8.8"; // Google's DNS - will resolve to USA
-      console.log("Development mode: Using fallback IP for geolocation");
-    }
-
-    // Get country from IP using ip-api.com (reliable on cloud deployments)
-    let countryName = "Unknown";
-    try {
-      const geoRes = await axios.get(`http://ip-api.com/json/${ip}?fields=country`, { timeout: 3000 });
-      if (geoRes.data?.country) {
-        countryName = geoRes.data.country;
-      }
-    } catch (geoErr) {
-      console.warn("Geolocation lookup failed, defaulting to Unknown:", geoErr.message);
-    }
+    // Country is detected client-side (browser's real IP bypasses Render's proxy)
+    const countryName = (clientCountry && clientCountry !== "Unknown") ? clientCountry : "Unknown";
 
     const verificationToken = crypto.randomBytes(32).toString("hex");
     const hashedPassword = await bcrypt.hash(password, 10);
