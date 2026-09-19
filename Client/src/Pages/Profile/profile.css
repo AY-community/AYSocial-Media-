@@ -70,6 +70,18 @@
   color: var(--text-color);
   margin-bottom: 6px;
   line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.profile-gender-badge {
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 .profile-handle {

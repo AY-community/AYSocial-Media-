@@ -623,7 +623,14 @@ export default function OtherProfile({ userData, loading }) {
                   }}
                 ></div>
                 <div className="profile-details">
-                  <h1 className="profile-name">{userData.userName}</h1>
+                  <h1 className="profile-name">
+                    {userData.userName}
+                    {userData.gender && (
+                      <span className="profile-gender-badge" aria-label={userData.gender}>
+                        {userData.gender === "male" ? "♂️" : userData.gender === "female" ? "♀️" : "⚧️"}
+                      </span>
+                    )}
+                  </h1>
                   <p className="profile-handle">{userData.name}</p>
                   <p className="profile-date">
                     {t("joined")}{" "}
