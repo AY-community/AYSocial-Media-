@@ -24,6 +24,10 @@ import { shareUrl } from "../../Utils/shareUrl";
 import { SkeletonCard } from "../../Components/Post&Video/SkeletonCard";
 import { useTranslation } from "react-i18next";
 import SEO from '../../Utils/SEO';
+import countries from "i18n-iso-countries";
+import enLocale from "i18n-iso-countries/langs/en.json";
+
+countries.registerLocale(enLocale);
 
 const countryAliasMap = {
   "usa": "United States of America",
@@ -58,46 +62,14 @@ const getCountryFlagUrl = async (countryName) => {
   const normalizedName = normalizeCountryName(countryName);
   if (!normalizedName) return "🌐";
 
-  try {
-    const lookupUrl = `https://restcountries.com/v3.1/name/${encodeURIComponent(normalizedName)}?fullText=false`;
-    const response = await fetch(lookupUrl);
+  const code =
+    countries.getAlpha2Code(normalizedName, "en") ||
+    countries.getAlpha2Code(normalizedName.replace(" of ", " "), "en") ||
+    countries.getAlpha2Code(countryAliasMap[normalizedName.toLowerCase()] || normalizedName, "en");
 
-    if (!response.ok) {
-      return "🌐";
-    }
+  if (!code) return "🌐";
 
-    const data = await response.json();
-    const match = Array.isArray(data) ? data[0] : null;
-    if (match?.flags?.png || match?.flags?.svg) {
-      return match.flags.png || match.flags.svg;
-    }
-
-    const allResponse = await fetch("https://restcountries.com/v3.1/all");
-    if (!allResponse.ok) {
-      return "🌐";
-    }
-
-    const allCountries = await allResponse.json();
-    const normalizedTarget = normalizeCountryName(normalizedName)?.toLowerCase();
-
-    const fallbackMatch = allCountries.find((country) => {
-      const aliases = [
-        country?.name?.common,
-        country?.name?.official,
-        ...(country?.altSpellings || [])
-      ].filter(Boolean).map((value) => normalizeCountryName(value)?.toLowerCase());
-
-      return aliases.includes(normalizedTarget);
-    });
-
-    if (fallbackMatch?.flags?.png || fallbackMatch?.flags?.svg) {
-      return fallbackMatch.flags.png || fallbackMatch.flags.svg;
-    }
-
-    return "🌐";
-  } catch (error) {
-    return "🌐";
-  }
+  return `https://flagcdn.com/w320/${code.toLowerCase()}.png`;
 };
 
 export default function OtherProfile({ userData, loading }) {
