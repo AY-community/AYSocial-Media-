@@ -4,8 +4,6 @@ const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const otpGenerator = require("otp-generator");
-const geoip = require("geoip-lite");
-const countries = require("i18n-iso-countries");
 const axios = require("axios");
 const sendMail = require("../Config/EmailSend");
 const { GetEmailTemplate } = require("../Templates/EmailTemplate");
@@ -89,12 +87,16 @@ const signUpController = async (req, res) => {
       console.log("Development mode: Using fallback IP for geolocation");
     }
 
-    // Get country from IP
-    const geo = geoip.lookup(ip);
-    const country = geo?.country || "Unknown";
-
-    countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
-    const countryName = countries.getName(country, "en") || "Unknown";
+    // Get country from IP using ip-api.com (reliable on cloud deployments)
+    let countryName = "Unknown";
+    try {
+      const geoRes = await axios.get(`http://ip-api.com/json/${ip}?fields=country`, { timeout: 3000 });
+      if (geoRes.data?.country) {
+        countryName = geoRes.data.country;
+      }
+    } catch (geoErr) {
+      console.warn("Geolocation lookup failed, defaulting to Unknown:", geoErr.message);
+    }
 
     const verificationToken = crypto.randomBytes(32).toString("hex");
     const hashedPassword = await bcrypt.hash(password, 10);
