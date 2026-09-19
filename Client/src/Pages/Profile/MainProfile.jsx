@@ -250,6 +250,7 @@ export default function Profile() {
       ? {
           name: user?.name || "",
           userName: user?.userName,
+          gender: user?.gender || "",
           location: user?.country,
 
           posts: posts,
@@ -296,6 +297,7 @@ export default function Profile() {
           id: otherUser?._id,
           name: otherUser?.name || "",
           userName: otherUser?.userName,
+          gender: otherUser?.gender || "",
           isPrivate: otherUser?.isPrivate || false,
           isFollowing: otherUser?.isFollowing || false,
           isFollowingBack: otherUser?.isFollowingBack || false,
