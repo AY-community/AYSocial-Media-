@@ -53,6 +53,22 @@ router.get('/auth/google/callback',
     try {
       const user = req.user;
 
+      // Set country if not already set (new OAuth users have no country)
+      if (!user.country || user.country === "Unknown") {
+        try {
+          let ip = req.ip;
+          if (process.env.NODE_ENV !== "production") ip = "8.8.8.8";
+          const axios = require("axios");
+          const geoRes = await axios.get(`http://ip-api.com/json/${ip}?fields=country`, { timeout: 3000 });
+          if (geoRes.data?.country) {
+            user.country = geoRes.data.country;
+            await user.save();
+          }
+        } catch (geoErr) {
+          console.warn("OAuth geolocation failed:", geoErr.message);
+        }
+      }
+
       const token = jwt.sign(
         { id: user._id, email: user.email, tokenVersion: user.tokenVersion || 0 },
         process.env.JWT_SECRET,
