@@ -770,10 +770,7 @@ export default function OtherProfile({ userData, loading }) {
                 style={{ paddingBottom: "15px" }}
               >
                 <div className="content-profile-header">
-                  <h2
-                    className="section-title section-profile-title"
-                    style={{ marginBottom: "35px" }}
-                  >
+                  <h2 className="section-title section-profile-title">
                     {t("Recent Activity")}
                   </h2>
 
