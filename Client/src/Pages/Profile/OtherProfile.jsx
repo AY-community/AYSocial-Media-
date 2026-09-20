@@ -595,18 +595,14 @@ export default function OtherProfile({ userData, loading }) {
               <div
                 className="profile-banner"
                 style={{
-                  backgroundImage:
+                  background:
                     userData.coverPic?.type === "image" &&
                     userData.coverPic?.image
                       ? `url(${userData.coverPic.image})`
-                      : !userData.coverPic?.type
-                      ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
-                      : "none",
-                  backgroundColor:
-                    userData.coverPic?.type === "color" &&
-                    userData.coverPic?.color
-                      ? userData.coverPic.color
-                      : "transparent",
+                      : userData.coverPic?.type === "color" &&
+                        userData.coverPic?.color
+                        ? userData.coverPic.color
+                        : "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
