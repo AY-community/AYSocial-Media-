@@ -635,19 +635,22 @@ export default function MyProfile({ userData, loading }) {
         <div style={{ width: "100%" }}>
           <div className="main-content">
             <div className="profile-header">
-              <div
-                className="profile-banner"
-                style={{
-                  background:
-                    userData.coverPic && userData.coverPic.image
-                      ? `url(${userData.coverPic.image})`
-                      : userData.coverPic?.color ||
-                        "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              ></div>
+              {userData.coverPic?.image ? (
+                <div className="profile-banner">
+                  <img
+                    src={userData.coverPic.image}
+                    alt={`${userData.userName} cover`}
+                    className="profile-banner-image"
+                  />
+                </div>
+              ) : (
+                <div
+                  className="profile-banner"
+                  style={{
+                    background: userData.coverPic?.color || "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                  }}
+                />
+              )}
               <div className="profile-info">
                 <div
                   className="profile-avatar-large"
