@@ -223,10 +223,10 @@ export default function DisplayVideoModal({
         }
       );
       if (response.ok) {
-        // update state optimistically after server acknowledgement
-        const newLike = !isLiked;
-        setIsLiked(newLike);
-        setLikesCount((prev) => (newLike ? prev + 1 : Math.max(0, prev - 1)));
+        const responseData = await response.json();
+        const nextLikeStatus = Boolean(responseData.isLiked ?? !isLiked);
+        setIsLiked(nextLikeStatus);
+        setLikesCount(Number(responseData.updatedLikesCount ?? responseData.likesCount ?? likesCount));
       }
     } catch (err) {
       console.error(err.message);

@@ -114,7 +114,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .profile-location {
@@ -176,12 +176,20 @@
   flex-wrap: wrap;
   gap: 6px;
   row-gap: 6px;
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+
+.profile-link-chip + .profile-job-list,
+.profile-job-list + .profile-bio,
+.profile-link-chip + .profile-bio {
+  margin-top: 4px;
 }
 
 .profile-bio {
   font-size: 16px;
   color: var(--text-color);
-  margin: 0 0 18px;
+  margin: 0 0 8px;
   padding-right: 20px;
   line-height: 1.5;
   font-weight: 400;
@@ -193,10 +201,17 @@
   overflow: hidden;
 }
 
+.profile-bio + .profile-stats,
+.profile-job-list + .profile-stats,
+.profile-location + .profile-stats {
+  margin-top: 10px;
+}
+
 .profile-stats {
   display: flex;
   gap: 32px;
-  margin-bottom: 18px;
+  margin-top: 0;
+  margin-bottom: 8px;
 }
 
 .stat {
@@ -1040,9 +1055,30 @@
     padding-top: 20px;
   }
 
+  .profile-meta-stack {
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .profile-location {
+    margin-bottom: 0;
+  }
+
   .profile-bio {
     font-size: 14px;
     padding-right: 0;
+    margin-bottom: 8px;
+  }
+
+  .profile-bio + .profile-stats,
+  .profile-job-list + .profile-stats,
+  .profile-location + .profile-stats {
+    margin-top: 8px;
+  }
+
+  .profile-stats {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
   /* IMPROVED MOBILE RESPONSIVE */

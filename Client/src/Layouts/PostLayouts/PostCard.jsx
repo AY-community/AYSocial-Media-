@@ -29,14 +29,37 @@ const PostCard = ({
   const [isSaved, setIsSaved] = useState(Saved);
   const [showMenu, setShowMenu] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [likePending, setLikePending] = useState(false);
   const navigate = useNavigate();
 
   const menuRef = useRef(null);
 
-  const handleLike = (e) => {
+  useEffect(() => {
+    setIsLiked(Liked);
+    setIsSaved(Saved);
+    setLikes(initialLikes);
+  }, [Liked, Saved, initialLikes]);
+
+  const handleLike = async (e) => {
     e.stopPropagation();
-    setIsLiked(!isLiked);
-    setLikes(isLiked ? likes - 1 : likes + 1);
+
+    if (likePending) return;
+
+    const nextLikeState = !isLiked;
+    setLikePending(true);
+    setIsLiked(nextLikeState);
+    setLikes((prev) => Math.max(0, nextLikeState ? prev + 1 : prev - 1));
+
+    try {
+      if (toggleLikeFunction) {
+        await toggleLikeFunction(nextLikeState);
+      }
+    } catch (error) {
+      setIsLiked(!nextLikeState);
+      setLikes((prev) => Math.max(0, !nextLikeState ? prev + 1 : prev - 1));
+    } finally {
+      setLikePending(false);
+    }
   };
 
   const handleSave = (e) => {

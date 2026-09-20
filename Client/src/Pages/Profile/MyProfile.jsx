@@ -201,7 +201,7 @@ export default function MyProfile({ userData, loading }) {
     userData.setVideos(sortedVideos);
   };
 
-  const toggleLikeApi = async (userId, postId) => {
+  const toggleLikeApi = async (userId, postId, nextLikeState) => {
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API}/posts/toggle-like/${userId}`,
@@ -223,15 +223,17 @@ export default function MyProfile({ userData, loading }) {
             post._id === postId
               ? {
                   ...post,
-                  likesCount: data.updatedLikesCount,
-                  isLiked: !post.isLiked,
+                  likesCount: Number(data.updatedLikesCount ?? post.likesCount),
+                  isLiked: Boolean(data.isLiked ?? nextLikeState ?? !post.isLiked),
                 }
               : post
           )
         );
       }
 
+      return response.ok ? data : null;
     } catch (err) {
+      return null;
     }
   };
 
@@ -912,9 +914,9 @@ export default function MyProfile({ userData, loading }) {
                           content={post.description}
                           image={post.images}
                           isOwner={true}
-                          toggleLikeFunction={() => {
-                            toggleLikeApi(user._id, post._id);
-                          }}
+                          toggleLikeFunction={async (nextLikeState) =>
+                            toggleLikeApi(user._id, post._id, nextLikeState)
+                          }
                           initialLikes={post.likesCount}
                           initialComments={post.commentsCount}
                           Liked={post.isLiked}

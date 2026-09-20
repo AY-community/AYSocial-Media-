@@ -331,11 +331,9 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
 
       if (response.ok) {
         const responseData = await response.json();
-        const newLikeStatus = !isLiked;
-        setIsLiked(newLikeStatus);
-        setLikesCount((prev) =>
-          newLikeStatus ? prev + 1 : Math.max(0, prev - 1)
-        );
+        const nextLikeStatus = Boolean(responseData.isLiked ?? !isLiked);
+        setIsLiked(nextLikeStatus);
+        setLikesCount(Number(responseData.updatedLikesCount ?? responseData.likesCount ?? likesCount));
       }
     } catch (err) {
       console.error(err.message);
