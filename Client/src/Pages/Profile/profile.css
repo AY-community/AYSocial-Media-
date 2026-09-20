@@ -746,9 +746,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  row-gap: 10px;
+  flex-wrap: nowrap;
+  gap: 10px;
+  row-gap: 0;
 }
 
 .content-section .empty-section button {
@@ -1182,19 +1182,26 @@
   }
 
   .content-profile-header {
-    align-items: flex-end;
-    gap: 8px;
-    row-gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 6px;
+    row-gap: 0;
   }
 
   .section-profile-title {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
+    line-height: 1.2;
     margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .sort-options-profile {
-    gap: 12px;
-    font-size: 0.72rem;
+    gap: 10px;
+    font-size: 0.68rem;
+    white-space: nowrap;
   }
 
   .empty-profile-section {
