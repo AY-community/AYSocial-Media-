@@ -93,6 +93,7 @@ export default function ReelCommentModal({ display, toggleModal, videoData, user
         `${import.meta.env.VITE_API}/videos/add-comment`,
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             videoId: videoData?._id,
@@ -130,7 +131,7 @@ export default function ReelCommentModal({ display, toggleModal, videoData, user
     try {
       await fetch(
         `${import.meta.env.VITE_API}/videos/delete-comment/${videoData?._id}/${commentId}`,
-        { method: "DELETE" }
+        { method: "DELETE", credentials: "include" }
       );
 
       setComments((prev) => prev.filter((comment) => comment.id !== commentId));
@@ -146,6 +147,7 @@ export default function ReelCommentModal({ display, toggleModal, videoData, user
         `${import.meta.env.VITE_API}/videos/toggle-like-comment/${user._id}`,
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ commentId }),
         }
@@ -179,6 +181,7 @@ export default function ReelCommentModal({ display, toggleModal, videoData, user
         `${import.meta.env.VITE_API}/videos/add-reply/${videoData?._id}/${commentId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             userId: user._id,
@@ -225,7 +228,7 @@ export default function ReelCommentModal({ display, toggleModal, videoData, user
     try {
       await fetch(
         `${import.meta.env.VITE_API}/videos/delete-reply/${videoData?._id}/${commentId}/${replyId}`,
-        { method: "DELETE" }
+        { method: "DELETE", credentials: "include" }
       );
 
       setComments((prevComments) =>
@@ -251,6 +254,7 @@ export default function ReelCommentModal({ display, toggleModal, videoData, user
         `${import.meta.env.VITE_API}/videos/toggle-like-reply/${videoData._id}/${commentId}/${replyId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ userId: user._id }),
         }

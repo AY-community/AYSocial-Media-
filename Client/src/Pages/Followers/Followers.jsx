@@ -210,6 +210,7 @@ export default function Followers() {
         }/toggle-follow-status/${otherUserId}/${loggedInUserId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },

@@ -207,6 +207,7 @@ export default function MyProfile({ userData, loading }) {
         `${import.meta.env.VITE_API}/posts/toggle-like/${userId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -320,6 +321,7 @@ export default function MyProfile({ userData, loading }) {
         `${import.meta.env.VITE_API}/posts/toggle-save/${user._id}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -351,6 +353,7 @@ export default function MyProfile({ userData, loading }) {
         `${import.meta.env.VITE_API}/videos/toggle-save/${user._id}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },

@@ -87,6 +87,7 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
         `${import.meta.env.VITE_API}/posts/toggle-save/${user._id}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -159,6 +160,7 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
         `${import.meta.env.VITE_API}/posts/add-comment/`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -203,6 +205,7 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
         `${import.meta.env.VITE_API}/posts/toggle-like-comment/${userId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "content-type": "application/json",
           },
@@ -316,6 +319,7 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
         `${import.meta.env.VITE_API}/posts/toggle-like/${user._id}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -346,6 +350,7 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
         }/posts/delete-comment/${postId}/${commentId}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
       setComments(comments.filter((comment) => comment.id !== commentId));
@@ -361,6 +366,7 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
         `${import.meta.env.VITE_API}/posts/add-reply/${postId}/${commentId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -412,6 +418,7 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
         `${import.meta.env.VITE_API}/posts/delete-reply/${postId}/${commentId}/${replyId}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
 
@@ -437,6 +444,7 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
         `${import.meta.env.VITE_API}/posts/toggle-like-reply/${data.post._id}/${commentId}/${replyId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "content-type": "application/json",
           },

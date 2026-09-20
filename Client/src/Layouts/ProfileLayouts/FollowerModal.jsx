@@ -139,6 +139,7 @@ export default function FollowerModal({
         }/toggle-follow-status/${userIdToFollow}/${loggedInUserId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -165,6 +166,7 @@ export default function FollowerModal({
         }/toggle-follow-status/${userIdToUnfollow}/${loggedInUserId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },

@@ -213,6 +213,7 @@ export default function DisplayVideoModal({
         `${import.meta.env.VITE_API}/videos/toggle-like/${user._id}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -250,6 +251,7 @@ export default function DisplayVideoModal({
         `${import.meta.env.VITE_API}/videos/add-comment`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -295,6 +297,7 @@ export default function DisplayVideoModal({
         `${import.meta.env.VITE_API}/videos/toggle-like-comment/${userId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "content-type": "application/json",
           },
@@ -330,6 +333,7 @@ export default function DisplayVideoModal({
         }/videos/delete-comment/${videoId}/${commentId}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
       setComments(comments.filter((comment) => comment.id !== commentId));
@@ -345,6 +349,7 @@ export default function DisplayVideoModal({
         `${import.meta.env.VITE_API}/videos/add-reply/${videoId}/${commentId}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
@@ -396,6 +401,7 @@ export default function DisplayVideoModal({
         `${import.meta.env.VITE_API}/videos/delete-reply/${videoId}/${commentId}/${replyId}`,
         {
           method: "DELETE",
+          credentials: "include",
         }
       );
 
@@ -420,8 +426,7 @@ export default function DisplayVideoModal({
       const response = await fetch(
         `${import.meta.env.VITE_API}/videos/toggle-like-reply/${data.video._id}/${commentId}/${replyId}`,
         {
-          method: "POST",
-          headers: {
+          method: "POST",          credentials: "include",          headers: {
             "content-type": "application/json",
           },
           body: JSON.stringify({ userId: user._id }),
@@ -464,6 +469,7 @@ export default function DisplayVideoModal({
         `${import.meta.env.VITE_API}/videos/toggle-save/${user._id}`,
         {
           method: "POST",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
           },
