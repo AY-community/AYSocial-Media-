@@ -27,21 +27,31 @@ export default function Auth() {
   const tokenFromState = location.state?.token || "";
 
   useEffect(() => {
+    let active = true;
+
     const checkAuth = async () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_API}/auth-check`, {
           credentials: "include",
         });
 
+        if (!active) return;
+
         if (res.status === 403) {
           navigate("/", { replace: true });
         }
       } catch (err) {
-        console.error("Auth check failed:", err.message);
+        if (active) {
+          console.error("Auth check failed:", err.message);
+        }
       }
     };
 
     checkAuth();
+
+    return () => {
+      active = false;
+    };
   }, [navigate]);
 
   useEffect(() => {

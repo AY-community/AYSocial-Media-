@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Spinner from "../Components/Ui/Spinner";
 
@@ -6,48 +6,59 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const location = useLocation();
+  const isMountedRef = useRef(false);
+  const requestInFlightRef = useRef(false);
 
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
 
   useEffect(() => {
     const isAuthPage = location.pathname.startsWith("/auth");
-    
-    const fetchUser = async () => {
-      const startTime = Date.now();
-      
-      try {
-        const res = await fetch(`${import.meta.env.VITE_API}/me`, {
-          credentials: "include",
-        });
-
-        if (!res.ok) throw new Error("Failed to fetch user");
-        const data = await res.json();
-        setUser(data);
-      } catch (err) {
-        setUser(null);
-      } finally {
-        // Calculate elapsed time
-        const elapsedTime = Date.now() - startTime;
-        const remainingTime = Math.max(2000 - elapsedTime, 0); // Minimum 2 seconds
-        
-        // Wait for remaining time before hiding spinner
-        setTimeout(() => {
-          setLoadingUser(false);
-        }, remainingTime);
-      }
-    };
 
     if (isAuthPage) {
       setLoadingUser(false);
       return;
     }
 
-    if (!user) {
-      fetchUser();
-    } else {
+    if (user) {
       setLoadingUser(false);
+      return;
     }
+
+    if (requestInFlightRef.current) return;
+
+    const fetchUser = async () => {
+      requestInFlightRef.current = true;
+      setLoadingUser(true);
+
+      try {
+        const res = await fetch(`${import.meta.env.VITE_API}/me`, {
+          credentials: "include",
+        });
+
+        if (!res.ok) {
+          setUser(null);
+          return;
+        }
+
+        const data = await res.json();
+        setUser(data);
+      } catch (err) {
+        setUser(null);
+      } finally {
+        requestInFlightRef.current = false;
+        setLoadingUser(false);
+      }
+    };
+
+    fetchUser();
+  }, [location.pathname, user]);
+
+  useEffect(() => {
+    isMountedRef.current = true;
+    return () => {
+      isMountedRef.current = false;
+    };
   }, []);
 
   const updatePrivacySettings = async (settings) => {
