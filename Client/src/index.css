@@ -117,6 +117,8 @@
 
 html{
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body{
@@ -126,6 +128,19 @@ body{
     height: 100vh;
     overscroll-behavior: none;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    input,
+    textarea,
+    select,
+    button {
+        font-size: 16px;
+    }
 }
 
 #root{
