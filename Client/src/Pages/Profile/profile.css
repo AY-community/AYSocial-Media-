@@ -746,8 +746,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-    flex-wrap: wrap;
-
+  flex-wrap: wrap;
+  gap: 12px;
+  row-gap: 10px;
 }
 
 .content-section .empty-section button {
@@ -769,9 +770,9 @@
   gap: 50px;
   font-size: 1.1rem;
   color: var(--secondary-text-color);
-  margin-bottom: 30px;
+  margin: 0;
   width: 100%;
-
+  align-items: center;
 }
 
 .sort-options-profile li{
@@ -1180,8 +1181,20 @@
     width: calc(100% - 20px);
   }
 
+  .content-profile-header {
+    align-items: flex-end;
+    gap: 8px;
+    row-gap: 8px;
+  }
+
   .section-profile-title {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .sort-options-profile {
+    gap: 12px;
+    font-size: 0.72rem;
   }
 
   .empty-profile-section {
