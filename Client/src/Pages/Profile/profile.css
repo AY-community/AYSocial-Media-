@@ -711,15 +711,35 @@
   gap: 10px;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.content-section .empty-section img {
+  display: block;
+  width: min(100%, 280px);
+  max-width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
+  object-position: center;
 }
 
 .content-section .empty-section h3 {
   font-size: 1.3rem;
+  text-align: center;
+  max-width: 100%;
 }
 
 .content-section .empty-section h5 {
   color: var(--secondary-text-color);
   text-align: center;
+  max-width: 100%;
+  width: min(100%, 520px);
+  line-height: 1.5;
 }
 
 .content-profile-header {
