@@ -6,8 +6,9 @@
   flex-direction: row;
   justify-self: center;
   justify-content: center;
-  width: var(--width-maincontent);
-  max-width: var(--max-width-maincontent);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 
@@ -1180,10 +1181,10 @@
 @media screen and (max-width: 400px) {
   .main-layout {
     margin-right: 0;
-    min-width: 400px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
   }
-
-
 }
 
 @media (prefers-color-scheme: dark) {
