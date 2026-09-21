@@ -8,12 +8,14 @@ export const AuthProvider = ({ children }) => {
   const location = useLocation();
   const isMountedRef = useRef(false);
   const requestInFlightRef = useRef(false);
+  const authCheckSettledRef = useRef(false);
 
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
 
   const clearAuthState = () => {
     requestInFlightRef.current = false;
+    authCheckSettledRef.current = true;
     setUser(null);
     setLoadingUser(false);
   };
@@ -22,16 +24,21 @@ export const AuthProvider = ({ children }) => {
     const isAuthPage = location.pathname.startsWith("/auth");
 
     if (isAuthPage) {
+      authCheckSettledRef.current = false;
       setLoadingUser(false);
       return;
     }
 
     if (user) {
+      authCheckSettledRef.current = true;
       setLoadingUser(false);
       return;
     }
 
-    if (requestInFlightRef.current) return;
+    if (authCheckSettledRef.current || requestInFlightRef.current) {
+      setLoadingUser(false);
+      return;
+    }
 
     const fetchUser = async () => {
       requestInFlightRef.current = true;
@@ -43,14 +50,18 @@ export const AuthProvider = ({ children }) => {
         });
 
         if (!res.ok) {
-          clearAuthState();
+          authCheckSettledRef.current = true;
+          setUser(null);
+          setLoadingUser(false);
           return;
         }
 
         const data = await res.json();
+        authCheckSettledRef.current = true;
         setUser(data);
       } catch (err) {
-        clearAuthState();
+        authCheckSettledRef.current = true;
+        setUser(null);
       } finally {
         requestInFlightRef.current = false;
         setLoadingUser(false);
@@ -58,7 +69,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     fetchUser();
-  }, [location.pathname, user]);
+  }, [location.pathname]);
 
   useEffect(() => {
     isMountedRef.current = true;
