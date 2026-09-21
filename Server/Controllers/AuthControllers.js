@@ -464,20 +464,17 @@ const checkAuthStatus = async (req, res) => {
 
 const logoutController = async (req, res) => {
   try {
-    // Increment tokenVersion to invalidate all sessions globally
-    if (req.cookies?.token) {
-      try {
-        const jwt = require("jsonwebtoken");
-        const decoded = jwt.verify(req.cookies.token, process.env.JWT_SECRET);
-        await User.findByIdAndUpdate(decoded.id, { $inc: { tokenVersion: 1 } });
-      } catch (_) { /* token may already be invalid, that's fine */ }
-    }
+    // Logout should only clear the current browser cookie.
+    // Do NOT bump tokenVersion here, because that invalidates all sessions
+    // for the same user across all devices, which is the bug causing
+    // cross-device logout behavior.
     res.clearCookie("token", {
       httpOnly: true,
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       secure: process.env.NODE_ENV === "production",
-      path: "/"
+      path: "/",
     });
+
     return res.status(200).json({ message: "Logged out successfully." });
   } catch (err) {
     console.error("Error during logout:", err);
