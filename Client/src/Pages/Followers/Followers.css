@@ -155,6 +155,11 @@
         padding: 30px 15px;
     }
 
+    .followers-header h1 {
+        font-size: 26px;
+        line-height: 1.2;
+    }
+
     .followers-header .followers-input-div {
         width: 100%;
     }

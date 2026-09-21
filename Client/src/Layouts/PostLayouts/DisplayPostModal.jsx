@@ -8,7 +8,7 @@ import {
   PaperPlaneTilt,
   Heart,
   Trash,
-  ChatCircle,
+  ChatCircleText,
   Share,
   X,
   SpinnerGap,
@@ -642,7 +642,7 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
             </button>
 
             <a className="social-btn comment-btn" href="#comments-section">
-              <ChatCircle size={24} weight="bold" />
+              <ChatCircleText size={24} weight="bold" />
               <span className="social-count">{totalComments}</span>
             </a>
 

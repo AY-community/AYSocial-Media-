@@ -13,7 +13,7 @@ import {
   Pause,
   SpeakerHigh,
   SpeakerX,
-  ChatCircle,
+  ChatCircleText,
   Share,
   SpinnerGap,
   BookmarkSimple,
@@ -644,7 +644,7 @@ export default function DisplayVideoModal({
               className="social-btn comment-btn"
               onClick={scrollToComments}
             >
-              <ChatCircle size={24} weight="bold" />
+              <ChatCircleText size={24} weight="bold" />
               <span className="social-count">{totalComments}</span>
             </button>
 

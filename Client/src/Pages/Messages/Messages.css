@@ -1553,6 +1553,13 @@
 
 /* Tablet portrait */
 @media (max-width: 768px) {
+  .message-heading {
+    font-size: 26px;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    padding-left: 16px;
+  }
+
   .messages-page-container {
     margin-top: 5px;
     height: calc(100vh - 101px); /* Adjust for header + nav */
@@ -1869,6 +1876,7 @@
   .conversations-header h2,
   .conversations-header h1 {
     font-size: 26px;
+    line-height: 1.2;
   }
   
   .conversations-search input {
