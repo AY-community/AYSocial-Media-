@@ -380,7 +380,7 @@ export default function FollowerModal({
 
                       {!isCurrentUser && (
                         <button
-                          className={getActionButtonClass(followerUserId)}
+                          className={`${getActionButtonClass(followerUserId)} follower-modal-action-btn`}
                           onClick={() =>
                             handleActionButtonClick(followerUserId)
                           }
@@ -455,7 +455,7 @@ export default function FollowerModal({
                         </div>
 
                         <button
-                          className="btn btn-primary"
+                          className="btn btn-primary follower-modal-action-btn"
                           onClick={() => followUser(user._id)}
                         >
                           {t("Follow")}

@@ -445,7 +445,7 @@ export default function FollowingModal({
 
                       {!isCurrentUser && (
                         <button
-                          className={getActionButtonClass(followingUserId)}
+                          className={`${getActionButtonClass(followingUserId)} follower-modal-action-btn`}
                           onClick={() =>
                             handleActionButtonClick(followingUserId)
                           }
@@ -517,7 +517,7 @@ export default function FollowingModal({
                         </div>
 
                         <button
-                          className={getSuggestedButtonClass(user._id)}
+                          className={`${getSuggestedButtonClass(user._id)} follower-modal-action-btn`}
                           onClick={() => toggleFollowUser(user._id)}
                         >
                           {getSuggestedButtonText(user._id)}

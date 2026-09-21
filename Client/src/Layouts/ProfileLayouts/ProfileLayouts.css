@@ -11,6 +11,71 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.follower-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.follower-item .post-user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.follower-item .post-user-info .username,
+.follower-item .post-user-info .post-time {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.follower-item .post-user-info .username {
+  max-width: min(100%, 170px);
+}
+
+.follower-item .post-user-info .post-time {
+  max-width: min(100%, 180px);
+}
+
+.follower-item .btn,
+.follower-item button {
+  margin-left: auto;
+  flex-shrink: 0;
+  min-width: 92px;
+  max-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.follower-item .btn-primary {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
+.follower-item .btn-primary:hover {
+  background: var(--primary-dark-color, var(--primary-color));
+}
+
+.follower-item .btn-secondary {
+  background: var(--secondary-color);
+  border-color: var(--input-border-color);
+  color: var(--text-color);
+}
+
+.follower-item .btn-secondary:hover {
+  background: color-mix(in srgb, var(--secondary-color) 70%, #ffffff 30%);
+}
+
+.follower-item .btn-requested {
+  background: color-mix(in srgb, var(--primary-color) 10%, var(--secondary-color));
+  color: var(--primary-color);
+  border-color: color-mix(in srgb, var(--primary-color) 40%, var(--input-border-color));
+}
+
 .follower-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
