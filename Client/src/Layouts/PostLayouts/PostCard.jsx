@@ -283,10 +283,7 @@ const PostCard = ({
       <div className="post-actions">
         <button
           className={`action-btn ${isLiked ? "liked" : ""}`}
-          onClick={(e) => {
-            handleLike(e);
-            if (toggleLikeFunction) toggleLikeFunction();
-          }}
+          onClick={handleLike}
         >
           <svg
             className="action-icon"

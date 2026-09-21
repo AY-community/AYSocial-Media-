@@ -482,7 +482,8 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
 
   useEffect(() => {
     if (data?.post?._id) {
-      // Reset state when post changes
+      const latestPost = userData?.posts?.find((post) => post._id === data.post._id);
+
       setPage(0);
       setComments([]);
       setHasMore(true);
@@ -491,15 +492,18 @@ export default function DisplayModal({ display, toggleModal, data, userData }) {
       setReplyingToCommentId(null);
       setReplyText("");
       setExpandedReplies({});
-      
-      // Set like state
-      setIsLiked(data.post.isLiked || false);
-      setLikesCount(data.post.likesCount || 0);
-      
-      // Load comments for the new post
+
+      if (latestPost) {
+        setIsLiked(Boolean(latestPost.isLiked));
+        setLikesCount(Number(latestPost.likesCount || 0));
+      } else {
+        setIsLiked(Boolean(data.post.isLiked));
+        setLikesCount(Number(data.post.likesCount || 0));
+      }
+
       DisplayCommentApi();
     }
-  }, [data?.post?._id]);
+  }, [data?.post?._id, userData?.posts]);
 
   useEffect(() => {
     if (highlightCommentId && comments.length > 0) {
