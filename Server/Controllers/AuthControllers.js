@@ -430,7 +430,36 @@ const addBirthdayController = async (req, res) => {
 };
 
 const checkAuthStatus = async (req, res) => {
-  return res.status(200).json({ message: "Authentication checked" });
+  const token = req.cookies?.token;
+
+  if (!token) {
+    return res.status(401).json({ message: "No active session" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id).select("tokenVersion");
+
+    if (!user || decoded.tokenVersion !== user.tokenVersion) {
+      res.clearCookie("token", {
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+        secure: process.env.NODE_ENV === "production",
+        path: "/",
+      });
+      return res.status(401).json({ message: "Session expired" });
+    }
+
+    return res.status(200).json({ message: "Authentication checked" });
+  } catch (err) {
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+      secure: process.env.NODE_ENV === "production",
+      path: "/",
+    });
+    return res.status(401).json({ message: "Invalid session" });
+  }
 };
 
 const logoutController = async (req, res) => {

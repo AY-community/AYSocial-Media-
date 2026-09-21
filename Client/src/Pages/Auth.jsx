@@ -37,6 +37,15 @@ export default function Auth() {
 
         if (!active) return;
 
+        if (res.ok) {
+          navigate("/", { replace: true });
+          return;
+        }
+
+        if (res.status === 401) {
+          return;
+        }
+
         if (res.status === 403) {
           navigate("/", { replace: true });
         }
