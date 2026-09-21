@@ -26,7 +26,7 @@ import SEO from '../../Utils/SEO';
 
 export default function Settings() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, clearAuthState } = useAuth();
   const { t } = useTranslation();
 
   // State for delete modals
@@ -112,19 +112,24 @@ export default function Settings() {
   const handleLogout = async () => {
     try {
       const API_URL = import.meta.env.VITE_API;
-      
-      await fetch(`${API_URL}/logout`, {
-        method: 'POST',
-        credentials: 'include',
-      });
 
+      try {
+        await fetch(`${API_URL}/logout`, {
+          method: 'POST',
+          credentials: 'include',
+        });
+      } catch (err) {
+        console.error('Logout request failed:', err);
+      }
+
+      clearAuthState();
       document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      
-      navigate('/auth');
+      navigate('/auth', { replace: true });
     } catch (err) {
       console.error('Error logging out:', err);
+      clearAuthState();
       document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      navigate('/auth');
+      navigate('/auth', { replace: true });
     }
   };
 

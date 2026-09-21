@@ -159,10 +159,10 @@ function Home() {
   const [requestedUsers, setRequestedUsers] = useState(new Set());
 
   useEffect(() => {
-    if (user?._id) {
+    if (user?._id && !loadingUser) {
       fetchSuggestedUsers();
     }
-  }, [user?._id]);
+  }, [user?._id, loadingUser]);
 
   const fetchSuggestedUsers = async () => {
     if (suggestionsLoading || !user?._id) return;
@@ -283,11 +283,14 @@ function Home() {
   };
 
   useEffect(() => {
+    if (!user?._id || loadingUser) return;
     loadFeed();
-  }, [activeTab, page]);
+  }, [activeTab, page, user?._id, loadingUser]);
 
   const loadFeed = async () => {
     try {
+      if (!user?._id) return;
+
       setLoading(true);
       setError(null);
 

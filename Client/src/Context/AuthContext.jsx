@@ -12,6 +12,12 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
 
+  const clearAuthState = () => {
+    requestInFlightRef.current = false;
+    setUser(null);
+    setLoadingUser(false);
+  };
+
   useEffect(() => {
     const isAuthPage = location.pathname.startsWith("/auth");
 
@@ -37,14 +43,14 @@ export const AuthProvider = ({ children }) => {
         });
 
         if (!res.ok) {
-          setUser(null);
+          clearAuthState();
           return;
         }
 
         const data = await res.json();
         setUser(data);
       } catch (err) {
-        setUser(null);
+        clearAuthState();
       } finally {
         requestInFlightRef.current = false;
         setLoadingUser(false);
@@ -97,7 +103,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, loadingUser, updatePrivacySettings }}
+      value={{ user, setUser, loadingUser, clearAuthState, updatePrivacySettings }}
     >
       {children}
     </AuthContext.Provider>

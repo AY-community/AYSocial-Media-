@@ -2,10 +2,12 @@ import { useNavigate } from "react-router-dom";
 import defaultProfilePic from "../../assets/Profile/defaultProfilePic.jpg";
 import { SignOut } from "phosphor-react";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../Context/AuthContext";
 
 export default function ProfileDropDown({ user }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { clearAuthState } = useAuth();
 
   const handleLogout = async () => {
     try {
@@ -13,14 +15,21 @@ export default function ProfileDropDown({ user }) {
         method: "POST",
         credentials: "include",
       });
-      const data = await response.json();
+
+      clearAuthState();
+
       if (response.ok) {
-        navigate("/auth");
-      } else {
-        console.error(data.error);
+        navigate("/auth", { replace: true });
+        return;
       }
+
+      const data = await response.json().catch(() => ({}));
+      console.error(data.error || "Logout failed");
+      navigate("/auth", { replace: true });
     } catch (error) {
+      clearAuthState();
       console.error(t("Logout failed:"), error);
+      navigate("/auth", { replace: true });
     }
   };
 
