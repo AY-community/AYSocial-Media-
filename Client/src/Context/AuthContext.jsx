@@ -78,6 +78,37 @@ export const AuthProvider = ({ children }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const originalFetch = window.fetch.bind(window);
+
+    const wrappedFetch = async (...args) => {
+      const response = await originalFetch(...args);
+
+      if (response.status === 401 && !location.pathname.startsWith("/auth")) {
+        window.dispatchEvent(new CustomEvent("auth:unauthorized"));
+      }
+
+      return response;
+    };
+
+    window.fetch = wrappedFetch;
+
+    return () => {
+      window.fetch = originalFetch;
+    };
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleUnauthorized = () => {
+      if (!location.pathname.startsWith("/auth")) {
+        clearAuthState();
+      }
+    };
+
+    window.addEventListener("auth:unauthorized", handleUnauthorized);
+    return () => window.removeEventListener("auth:unauthorized", handleUnauthorized);
+  }, [location.pathname]);
+
   const updatePrivacySettings = async (settings) => {
     try {
       const res = await fetch(

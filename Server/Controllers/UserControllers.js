@@ -1816,7 +1816,13 @@ const deleteMyAccountController = async (req, res) => {
 
     // STEP 4: Delete account & clear cookie
     await User.findByIdAndDelete(actualUserId);
-    res.clearCookie("token", { httpOnly: true, sameSite: "strict", secure: true });
+    const isProduction = process.env.NODE_ENV === "production";
+    res.clearCookie("token", {
+      httpOnly: true,
+      path: "/",
+      sameSite: isProduction ? "None" : "Lax",
+      secure: isProduction,
+    });
 
     console.log(`Self-deletion completed for user: ${userName}`);
     return res.status(200).json({ success: true, message: "Your account has been deleted successfully." });

@@ -186,12 +186,13 @@ const loginController = async (req, res) => {
             { expiresIn: "2d" }
           );
 
-          // Cookie configuration based on environment
+          const isProduction = process.env.NODE_ENV === "production";
           const cookieOptions = {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24 * 2, // 2 days
-            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
-            secure: process.env.NODE_ENV === "production",
+            path: "/",
+            maxAge: 1000 * 60 * 60 * 24 * 2,
+            sameSite: isProduction ? "None" : "Lax",
+            secure: isProduction,
           };
 
           res.cookie("token", token, cookieOptions);
@@ -443,9 +444,9 @@ const checkAuthStatus = async (req, res) => {
     if (!user || decoded.tokenVersion !== user.tokenVersion) {
       res.clearCookie("token", {
         httpOnly: true,
+        path: "/",
         sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
         secure: process.env.NODE_ENV === "production",
-        path: "/",
       });
       return res.status(401).json({ message: "Session expired" });
     }
@@ -454,9 +455,9 @@ const checkAuthStatus = async (req, res) => {
   } catch (err) {
     res.clearCookie("token", {
       httpOnly: true,
+      path: "/",
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       secure: process.env.NODE_ENV === "production",
-      path: "/",
     });
     return res.status(401).json({ message: "Invalid session" });
   }
@@ -470,9 +471,9 @@ const logoutController = async (req, res) => {
     // cross-device logout behavior.
     res.clearCookie("token", {
       httpOnly: true,
+      path: "/",
       sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
       secure: process.env.NODE_ENV === "production",
-      path: "/",
     });
 
     return res.status(200).json({ message: "Logged out successfully." });
