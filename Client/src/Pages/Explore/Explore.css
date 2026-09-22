@@ -130,8 +130,8 @@
 
 /* Loading states */
 .explore-loading {
-  width: auto;
-  display: inline-flex;
+  width: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px 0;
