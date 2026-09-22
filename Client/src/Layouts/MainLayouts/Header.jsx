@@ -35,7 +35,7 @@ function Header({ className, hideOnMobile = false }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [pressedIcon, setPressedIcon] = useState(null);
-  const [isHomeHeaderShifted, setIsHomeHeaderShifted] = useState(false);
+  const [isHeaderHidden, setIsHeaderHidden] = useState(false);
   const dropdownRef = useRef(null);
   const searchContainerRef = useRef(null);
   const lastScrollYRef = useRef(0);
@@ -59,8 +59,8 @@ function Header({ className, hideOnMobile = false }) {
       setIsMobile(nextWidth <= 768);
       setWindowWidth(nextWidth);
 
-      if (nextWidth > 1000 || location.pathname !== "/") {
-        setIsHomeHeaderShifted(false);
+      if (nextWidth > 1000 || (location.pathname !== "/" && !location.pathname.startsWith("/messages"))) {
+        setIsHeaderHidden(false);
         lastScrollYRef.current = window.scrollY;
       }
     };
@@ -74,22 +74,20 @@ function Header({ className, hideOnMobile = false }) {
       const currentScrollY = window.scrollY;
       const scrollDelta = currentScrollY - lastScrollYRef.current;
 
-      if (windowWidth <= 1000 && location.pathname === "/") {
-        const shouldShift = scrollDelta > 40 && currentScrollY > 40;
-        if (shouldShift) {
-          setIsHomeHeaderShifted(true);
-        } else if (scrollDelta < -20) {
-          setIsHomeHeaderShifted(false);
-        }
-      } else if (windowWidth <= 1000 && location.pathname.startsWith("/messages")) {
-        const shouldShift = scrollDelta > 6 && currentScrollY > 6;
-        if (shouldShift) {
-          setIsHomeHeaderShifted(true);
-        } else if (scrollDelta < -6) {
-          setIsHomeHeaderShifted(false);
-        }
+      if (windowWidth > 1000) {
+        setIsHeaderHidden(false);
+        lastScrollYRef.current = currentScrollY;
+        return;
+      }
+
+      if (location.pathname === "/") {
+        const shouldHide = scrollDelta > 0 && currentScrollY > 70;
+        setIsHeaderHidden(shouldHide);
+      } else if (location.pathname.startsWith("/messages")) {
+        const shouldHide = scrollDelta > 0 && currentScrollY > 16;
+        setIsHeaderHidden(shouldHide);
       } else {
-        setIsHomeHeaderShifted(false);
+        setIsHeaderHidden(false);
       }
 
       lastScrollYRef.current = currentScrollY;
@@ -211,13 +209,10 @@ function Header({ className, hideOnMobile = false }) {
     return null;
   }
 
-  const isHomeHeaderActive = windowWidth <= 1000 && location.pathname === "/" && isHomeHeaderShifted;
-  const isMessagesHeaderActive = windowWidth <= 1000 && location.pathname.startsWith("/messages") && isHomeHeaderShifted;
-
   const headerClasses = [
     className,
     windowWidth <= 1000 ? "mobile-header" : "",
-    isHomeHeaderActive || isMessagesHeaderActive ? "header-shifted-home" : "",
+    windowWidth <= 1000 && isHeaderHidden ? "header-hidden" : "header-visible",
   ]
     .filter(Boolean)
     .join(" ");
