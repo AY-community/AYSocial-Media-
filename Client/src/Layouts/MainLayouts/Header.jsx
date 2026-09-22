@@ -35,8 +35,11 @@ function Header({ className, hideOnMobile = false }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [pressedIcon, setPressedIcon] = useState(null);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const dropdownRef = useRef(null);
   const searchContainerRef = useRef(null);
+  const lastScrollYRef = useRef(0);
   const isProfilePage = location.pathname === `/user/${user.userName}`;
 
   const isSettingsPage = location.pathname.startsWith("/settings");
@@ -53,13 +56,45 @@ function Header({ className, hideOnMobile = false }) {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-      setWindowWidth(window.innerWidth);
+      const nextWidth = window.innerWidth;
+      setIsMobile(nextWidth <= 768);
+      setWindowWidth(nextWidth);
+
+      if (nextWidth > 1000) {
+        setIsHeaderVisible(true);
+        setIsHeaderScrolled(false);
+        lastScrollYRef.current = window.scrollY;
+      }
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (windowWidth > 1000) {
+        setIsHeaderVisible(true);
+        setIsHeaderScrolled(false);
+        return;
+      }
+
+      const currentScrollY = window.scrollY;
+      const isScrollingDown = currentScrollY > lastScrollYRef.current && currentScrollY > 12;
+
+      if (isScrollingDown) {
+        setIsHeaderVisible(false);
+      } else {
+        setIsHeaderVisible(true);
+      }
+
+      setIsHeaderScrolled(currentScrollY > 8);
+      lastScrollYRef.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [windowWidth]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -173,9 +208,18 @@ function Header({ className, hideOnMobile = false }) {
     return null;
   }
 
+  const headerClasses = [
+    className,
+    windowWidth <= 1000 ? "mobile-header" : "",
+    isHeaderVisible ? "header-visible" : "header-hidden",
+    isHeaderScrolled ? "header-scrolled" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <>
-      <header className={className}>
+      <header className={headerClasses}>
         {((isDirectSettingsPage || isDirectSearchPage) && windowWidth <= 1000) || isExploreSharedPage ? (
           <>
             <ArrowLeft

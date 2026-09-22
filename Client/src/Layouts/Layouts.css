@@ -14,8 +14,24 @@ header {
     margin-right: auto;
     z-index: 1002;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(0);
+    transition: transform 0.26s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
     border-bottom: 0.8px solid var(--input-border-color);
+    will-change: transform;
+}
+
+header.header-visible {
+    transform: translateX(-50%) translateY(0);
+}
+
+header.header-hidden {
+    transform: translateX(-50%) translateY(-115%);
+    pointer-events: none;
+}
+
+header.header-scrolled {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    background-color: rgba(var(--third-color-rgb, 255, 255, 255), 0.96);
 }
 
 header h1 {
@@ -2838,6 +2854,22 @@ display: none;
 @media screen and (max-width: 1000px){
 
     /*Header*/
+
+    header {
+        width: 100%;
+        max-width: 100%;
+        left: 0;
+        transform: translateX(0) translateY(0);
+        transition: transform 0.26s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    }
+
+    header.header-visible {
+        transform: translateX(0) translateY(0);
+    }
+
+    header.header-hidden {
+        transform: translateX(0) translateY(-110%);
+    }
 
    header .s ,header  .i2 ,header  .lm  , header  .m{
         display: none;
