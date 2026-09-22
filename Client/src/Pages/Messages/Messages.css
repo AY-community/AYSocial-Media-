@@ -1603,7 +1603,7 @@
   }
 
   .messages-tab {
-    font-size: 14px;
+    font-size: 13px;
     padding: 11px 10px;
   }
 
@@ -1781,9 +1781,8 @@
   }
 
   .messages-tab{
-    font-size: 18px;
-    padding-block: 16px;
-
+    font-size: 13px;
+    padding-block: 13px;
   }
 
   @keyframes reactionSlideMobile {
