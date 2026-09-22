@@ -15,7 +15,7 @@ header {
     z-index: 1002;
     left: 50%;
     transform: translateX(-50%) translateY(0);
-    transition: transform 0.26s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+    transition: transform 0.32s ease, background-color 0.2s ease, border-color 0.2s ease;
     border-bottom: 0.8px solid var(--input-border-color);
     will-change: transform;
 }
@@ -30,8 +30,13 @@ header.header-hidden {
 }
 
 header.header-scrolled {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    background-color: rgba(var(--third-color-rgb, 255, 255, 255), 0.96);
+    background-color: var(--third-color);
+    box-shadow: none;
+}
+
+[data-theme="dark"] header.header-scrolled {
+    background-color: #ffffff;
+    border-bottom-color: rgba(0, 0, 0, 0.08);
 }
 
 header h1 {
@@ -2860,7 +2865,7 @@ display: none;
         max-width: 100%;
         left: 0;
         transform: translateX(0) translateY(0);
-        transition: transform 0.26s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        transition: transform 0.32s ease, background-color 0.2s ease, border-color 0.2s ease;
     }
 
     header.header-visible {
@@ -2869,6 +2874,11 @@ display: none;
 
     header.header-hidden {
         transform: translateX(0) translateY(-110%);
+    }
+
+    [data-theme="dark"] header.header-scrolled {
+        background-color: #ffffff;
+        border-bottom-color: rgba(0, 0, 0, 0.08);
     }
 
    header .s ,header  .i2 ,header  .lm  , header  .m{

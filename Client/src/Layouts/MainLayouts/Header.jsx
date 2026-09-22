@@ -80,15 +80,17 @@ function Header({ className, hideOnMobile = false }) {
       }
 
       const currentScrollY = window.scrollY;
-      const isScrollingDown = currentScrollY > lastScrollYRef.current && currentScrollY > 12;
+      const scrollDelta = currentScrollY - lastScrollYRef.current;
+      const isScrollingDown = scrollDelta > 12 && currentScrollY > 12;
+      const isScrollingUp = scrollDelta < -12;
 
       if (isScrollingDown) {
         setIsHeaderVisible(false);
-      } else {
+      } else if (isScrollingUp) {
         setIsHeaderVisible(true);
       }
 
-      setIsHeaderScrolled(currentScrollY > 8);
+      setIsHeaderScrolled(currentScrollY > 10);
       lastScrollYRef.current = currentScrollY;
     };
 
