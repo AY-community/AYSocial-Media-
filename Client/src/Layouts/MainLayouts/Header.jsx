@@ -36,7 +36,6 @@ function Header({ className, hideOnMobile = false }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [pressedIcon, setPressedIcon] = useState(null);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const dropdownRef = useRef(null);
   const searchContainerRef = useRef(null);
   const lastScrollYRef = useRef(0);
@@ -60,29 +59,29 @@ function Header({ className, hideOnMobile = false }) {
       setIsMobile(nextWidth <= 768);
       setWindowWidth(nextWidth);
 
-      if (nextWidth > 1000) {
+      if (nextWidth > 1000 || location.pathname !== "/") {
         setIsHeaderVisible(true);
-        setIsHeaderScrolled(false);
         lastScrollYRef.current = window.scrollY;
       }
     };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (windowWidth > 1000) {
+      const isHomeScrollHeader = windowWidth <= 1000 && location.pathname === "/";
+
+      if (!isHomeScrollHeader) {
         setIsHeaderVisible(true);
-        setIsHeaderScrolled(false);
         return;
       }
 
       const currentScrollY = window.scrollY;
       const scrollDelta = currentScrollY - lastScrollYRef.current;
-      const isScrollingDown = scrollDelta > 12 && currentScrollY > 12;
-      const isScrollingUp = scrollDelta < -12;
+      const isScrollingDown = scrollDelta > 10 && currentScrollY > 10;
+      const isScrollingUp = scrollDelta < -10;
 
       if (isScrollingDown) {
         setIsHeaderVisible(false);
@@ -90,13 +89,12 @@ function Header({ className, hideOnMobile = false }) {
         setIsHeaderVisible(true);
       }
 
-      setIsHeaderScrolled(currentScrollY > 10);
       lastScrollYRef.current = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [windowWidth]);
+  }, [windowWidth, location.pathname]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -213,8 +211,7 @@ function Header({ className, hideOnMobile = false }) {
   const headerClasses = [
     className,
     windowWidth <= 1000 ? "mobile-header" : "",
-    isHeaderVisible ? "header-visible" : "header-hidden",
-    isHeaderScrolled ? "header-scrolled" : "",
+    windowWidth <= 1000 && location.pathname === "/" ? (isHeaderVisible ? "header-visible" : "header-hidden") : "",
   ]
     .filter(Boolean)
     .join(" ");
