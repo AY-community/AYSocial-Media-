@@ -130,20 +130,21 @@
 
 /* Loading states */
 .explore-loading {
-  width: 100%;
-  display: flex;
+  width: auto;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 4px 0;
-  margin: 4px 0 8px;
-  min-height: 18px;
+  padding: 8px 0;
+  margin: 6px auto 10px;
+  min-height: 32px;
+  min-width: 32px;
 }
 
 .loading-spinner {
   color: var(--primary-color);
   animation: spin 1s linear infinite;
-  width: 18px;
-  height: 18px;
+  width: 28px;
+  height: 28px;
 }
 
 @keyframes spin {
@@ -152,10 +153,10 @@
 }
 
 .observer-target {
-  height: 12px;
+  height: 1px;
   width: 100%;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .explore-end-message,
