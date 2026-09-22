@@ -80,8 +80,9 @@ function Header({ className, hideOnMobile = false }) {
         return;
       }
 
-      if (location.pathname === "/reel") {
-        setIsHeaderHidden(false);
+      if (location.pathname === "/reel" || location.pathname.startsWith("/reel")) {
+        const shouldHide = scrollDelta > 0 && currentScrollY > 16;
+        setIsHeaderHidden(shouldHide);
       } else if (location.pathname === "/" || location.pathname.startsWith("/explore")) {
         const shouldHide = scrollDelta > 0 && currentScrollY > 70;
         setIsHeaderHidden(shouldHide);

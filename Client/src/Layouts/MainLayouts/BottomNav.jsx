@@ -21,7 +21,7 @@ export default function Nav() {
   
   const isChatPage = location.pathname.startsWith("/chat");
   const isExplorePage = location.pathname.startsWith("/explore");
-  const isReelsPage = location.pathname.startsWith("/reels");
+  const isReelsPage = location.pathname === "/reel" || location.pathname.startsWith("/reel");
 
   /* Display Post Menu */
   const displayMenu = () => {
