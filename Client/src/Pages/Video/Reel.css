@@ -10,7 +10,7 @@
 
 /* Reels Container - Vertical Scroll */
 .reels-container {
-  height: calc(100vh - 80px); /* Account for header */
+  height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
@@ -30,7 +30,7 @@
 .reel-item {
   position: relative;
   width: 100%;
-  height: calc(100vh - 80px); /* Account for header */
+  height: 100vh;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   display: flex;
