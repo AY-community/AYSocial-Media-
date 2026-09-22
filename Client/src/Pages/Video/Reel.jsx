@@ -42,6 +42,7 @@ const Reels = () => {
   const { user } = useAuth();
   const [followingUsers, setFollowingUsers] = useState(new Set());
   const [requestedUsers, setRequestedUsers] = useState(new Set());
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
   const navigate = useNavigate();
 
   const containerRef = useRef(null);
@@ -117,6 +118,12 @@ const Reels = () => {
       setLoading(false);
     }
   }, [loading, hasMore]);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 1000);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     fetchReels(1);
@@ -420,7 +427,7 @@ const Reels = () => {
        
       
       />
-      <Header />
+      {!isMobile && <Header />}
       <MainSideBar />
       <BottomNav />
 
@@ -550,6 +557,12 @@ const Reels = () => {
             {loading && (
               <div className="reels-loading">
                 <SpinnerGap size={48} className="spinner" />
+              </div>
+            )}
+
+            {!loading && reels.length === 0 && (
+              <div className="reels-empty-state">
+                <p>{t("There are no recent reels yet.")}</p>
               </div>
             )}
 
