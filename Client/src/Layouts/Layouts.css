@@ -15,17 +15,13 @@ header {
     z-index: 1002;
     left: 50%;
     transform: translateX(-50%) translateY(0);
-    transition: transform 0.5s ease;
+    transition: transform 0.7s ease;
     border-bottom: 0.8px solid var(--input-border-color);
     will-change: transform;
 }
 
-header.header-visible {
-    transform: translateX(-50%) translateY(0);
-}
-
-header.header-hidden {
-    transform: translateX(-50%) translateY(-12px);
+header.header-shifted-home {
+    transform: translateX(-50%) translateY(-8px);
 }
 
 header h1 {
@@ -2854,15 +2850,11 @@ display: none;
         max-width: 100%;
         left: 0;
         transform: translateX(0) translateY(0);
-        transition: transform 0.5s ease;
+        transition: transform 0.7s ease;
     }
 
-    header.header-visible {
-        transform: translateX(0) translateY(0);
-    }
-
-    header.header-hidden {
-        transform: translateX(0) translateY(-12px);
+    header.header-shifted-home {
+        transform: translateX(0) translateY(-8px);
     }
 
    header .s ,header  .i2 ,header  .lm  , header  .m{

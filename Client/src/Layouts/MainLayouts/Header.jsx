@@ -35,7 +35,7 @@ function Header({ className, hideOnMobile = false }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [pressedIcon, setPressedIcon] = useState(null);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [isHomeHeaderShifted, setIsHomeHeaderShifted] = useState(false);
   const dropdownRef = useRef(null);
   const searchContainerRef = useRef(null);
   const lastScrollYRef = useRef(0);
@@ -60,7 +60,7 @@ function Header({ className, hideOnMobile = false }) {
       setWindowWidth(nextWidth);
 
       if (nextWidth > 1000 || location.pathname !== "/") {
-        setIsHeaderVisible(true);
+        setIsHomeHeaderShifted(false);
         lastScrollYRef.current = window.scrollY;
       }
     };
@@ -71,22 +71,25 @@ function Header({ className, hideOnMobile = false }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      const isHomeScrollHeader = windowWidth <= 1000 && location.pathname === "/";
-
-      if (!isHomeScrollHeader) {
-        setIsHeaderVisible(true);
-        return;
-      }
-
       const currentScrollY = window.scrollY;
       const scrollDelta = currentScrollY - lastScrollYRef.current;
-      const isScrollingDown = scrollDelta > 10 && currentScrollY > 10;
-      const isScrollingUp = scrollDelta < -10;
 
-      if (isScrollingDown) {
-        setIsHeaderVisible(false);
-      } else if (isScrollingUp) {
-        setIsHeaderVisible(true);
+      if (windowWidth <= 1000 && location.pathname === "/") {
+        const shouldShift = scrollDelta > 40 && currentScrollY > 40;
+        if (shouldShift) {
+          setIsHomeHeaderShifted(true);
+        } else if (scrollDelta < -20) {
+          setIsHomeHeaderShifted(false);
+        }
+      } else if (windowWidth <= 1000 && location.pathname.startsWith("/messages")) {
+        const shouldShift = scrollDelta > 6 && currentScrollY > 6;
+        if (shouldShift) {
+          setIsHomeHeaderShifted(true);
+        } else if (scrollDelta < -6) {
+          setIsHomeHeaderShifted(false);
+        }
+      } else {
+        setIsHomeHeaderShifted(false);
       }
 
       lastScrollYRef.current = currentScrollY;
@@ -208,10 +211,13 @@ function Header({ className, hideOnMobile = false }) {
     return null;
   }
 
+  const isHomeHeaderActive = windowWidth <= 1000 && location.pathname === "/" && isHomeHeaderShifted;
+  const isMessagesHeaderActive = windowWidth <= 1000 && location.pathname.startsWith("/messages") && isHomeHeaderShifted;
+
   const headerClasses = [
     className,
     windowWidth <= 1000 ? "mobile-header" : "",
-    windowWidth <= 1000 && location.pathname === "/" ? (isHeaderVisible ? "header-visible" : "header-hidden") : "",
+    isHomeHeaderActive || isMessagesHeaderActive ? "header-shifted-home" : "",
   ]
     .filter(Boolean)
     .join(" ");
