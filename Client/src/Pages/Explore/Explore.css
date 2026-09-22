@@ -134,14 +134,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 0;
-  margin: 8px 0 32px; /* avoid overlapping with bottom nav */
-  min-height: 24px;
+  padding: 4px 0;
+  margin: 4px 0 8px;
+  min-height: 18px;
 }
 
 .loading-spinner {
   color: var(--primary-color);
   animation: spin 1s linear infinite;
+  width: 18px;
+  height: 18px;
 }
 
 @keyframes spin {
@@ -150,10 +152,10 @@
 }
 
 .observer-target {
-  height: 20px;
+  height: 12px;
   width: 100%;
   display: block;
-  margin-bottom: 16px; /* space for intersection */
+  margin-bottom: 8px;
 }
 
 .explore-end-message,

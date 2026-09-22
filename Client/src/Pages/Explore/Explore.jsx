@@ -215,7 +215,7 @@ const Explore = () => {
           {/* Loading indicator */}
           {loading && (
             <div className="explore-loading">
-              <CircleNotch size={40} className="loading-spinner" weight="bold" />
+              <CircleNotch size={18} className="loading-spinner" weight="bold" />
             </div>
           )}
 

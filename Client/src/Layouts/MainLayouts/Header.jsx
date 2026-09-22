@@ -131,6 +131,8 @@ function Header({ className, hideOnMobile = false }) {
 
   useEffect(() => {
     if (isSearchHistoryVisible) {
+      setSearchHistory([]);
+      setLoadingHistory(true);
       fetchSearchHistory();
     }
   }, [isSearchHistoryVisible]);
