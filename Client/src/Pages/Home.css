@@ -59,7 +59,7 @@
    ============================================ */
 .home-page-heading {
   width: 100%;
-  padding: 25px 25px 0;
+  padding: 25px;
   max-width: 2210px;
   background: transparent;
   border: none;
@@ -430,7 +430,6 @@
   display: flex;
   gap: 8px;
   margin-top: 16px;
-  margin-bottom: 16px;
 }
 
 .home-page-tab {
@@ -661,7 +660,7 @@
   }
 
   .home-page-heading {
-    padding: 30px 15px 0;
+    padding: 30px 15px;
     border-radius: 0;
     border: none;
     margin-top: 0;
@@ -674,7 +673,6 @@
   .home-page-tabs {
     gap: 6px;
     margin-top: 12px;
-    margin-bottom: 12px;
     flex-wrap: nowrap;
   }
 

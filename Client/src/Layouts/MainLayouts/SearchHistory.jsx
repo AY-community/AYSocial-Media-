@@ -17,7 +17,9 @@ const SearchHistory = ({ show, history, loading, onClearHistory, onRemoveItem, o
                 <button className="clear-all-btn" onClick={onClearHistory}>{t("Clear All")}</button>
             </div>
             {loading ? (
-                <div className="loading-spinner">{t("Loading...")}</div>
+                <div className="search-history-loading">
+                    <span>{t("Loading...")}</span>
+                </div>
             ) : (
                 <ul className="search-history-list">
                     {history
