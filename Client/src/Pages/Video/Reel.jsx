@@ -431,7 +431,7 @@ const Reels = () => {
       <MainSideBar />
       <BottomNav />
 
-      <div className="main-layout reels-layout">
+      <div className="reels-layout">
         <div className="margin-container"></div>
         <div style={{ width: '100%', maxWidth: '2210px', margin: '0 auto' }}>
           <div className="reels-container" ref={containerRef}>
