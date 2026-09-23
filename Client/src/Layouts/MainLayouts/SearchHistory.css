@@ -28,15 +28,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 48px;
-    padding: 8px 12px;
+    gap: 8px;
+    min-height: 56px;
+    padding: 10px 12px;
     color: var(--secondary-text-color);
     font-size: 12.5px;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0.01em;
     text-align: center;
-    opacity: 0.8;
+    opacity: 0.85;
     animation: none;
+}
+
+.search-history-spinner {
+    color: var(--primary-color);
+    animation: spin 0.9s linear infinite;
+    flex-shrink: 0;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .clear-all-btn {

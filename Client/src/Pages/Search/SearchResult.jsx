@@ -507,7 +507,7 @@ const SearchResults = () => {
   };
 
   const handleUserClick = (userName) => {
-    navigate(`/profile/${userName}`);
+    navigate(`/user/${userName}`);
   };
 
   const handleRelatedSearchClick = (searchTerm) => {

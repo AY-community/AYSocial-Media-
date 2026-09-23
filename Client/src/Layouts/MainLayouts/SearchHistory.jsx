@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './SearchHistory.css';
-import { X } from 'phosphor-react';
+import { X, CircleNotch } from 'phosphor-react';
 
 const SearchHistory = ({ show, history, loading, onClearHistory, onRemoveItem, onHistoryItemClick }) => {
     const { t } = useTranslation();
@@ -18,6 +18,7 @@ const SearchHistory = ({ show, history, loading, onClearHistory, onRemoveItem, o
             </div>
             {loading ? (
                 <div className="search-history-loading">
+                    <CircleNotch size={16} className="search-history-spinner" weight="bold" />
                     <span>{t("Loading...")}</span>
                 </div>
             ) : (
