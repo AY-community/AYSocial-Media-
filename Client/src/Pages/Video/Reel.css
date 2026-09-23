@@ -337,11 +337,11 @@
 @media (max-width: 1000px) {
   .reels-container {
     padding-right: 0;
-    height: calc(100vh - 140px); /* Account for header + bottom nav */
+    height: calc(100vh - 60px);
   }
 
   .reel-item {
-    height: calc(100vh - 140px); /* Account for header + bottom nav */
+    height: calc(100vh - 60px);
   }
 
   .reel-video-wrapper {
@@ -446,10 +446,10 @@
   }
   
   .reels-container {
-    height: calc(100vh - 140px);
+    height: calc(100vh - 60px);
   }
   
   .reel-item {
-    height: calc(100vh - 140px);
+    height: calc(100vh - 60px);
   }
 }
