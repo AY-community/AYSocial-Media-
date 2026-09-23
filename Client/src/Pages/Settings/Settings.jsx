@@ -170,13 +170,16 @@ const handleFinalDelete = async () => {
     const data = await response.json();
 
     if (data.success) {
+      clearAuthState();
       localStorage.clear();
       sessionStorage.clear();
-      navigate('/auth');
-    } else {
-      alert('❌ Failed to delete account: ' + data.error);
-      setButtonLoading(false);
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      window.location.replace('/auth');
+      return;
     }
+
+    alert('❌ Failed to delete account: ' + (data.error || 'Unknown error'));
+    setButtonLoading(false);
   } catch (err) {
     console.error('Error deleting account:', err);
     alert(`❌ Error: ${err.message}`);

@@ -52,18 +52,23 @@
 }
 
 .follower-list .no-followers-text {
+    margin: 0;
     text-align: center;
     color: var(--text-secondary-color);
-    font-size: 24px;
+    font-size: clamp(1.1rem, 2vw, 1.7rem);
+    line-height: 1.5;
 }
 
 .follower-list .empty-follower-section {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
     width: 100%;
     text-align: center;
+    padding: 24px 16px;
+    box-sizing: border-box;
 }
 
 .follower-list .loading-spinner-initial {

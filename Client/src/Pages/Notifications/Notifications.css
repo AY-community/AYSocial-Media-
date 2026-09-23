@@ -34,16 +34,31 @@
 }
 
 .no-notifications-text {
-  font-size: 25px;
+  margin: 0;
+  font-size: clamp(1.1rem, 2vw, 1.7rem);
+  line-height: 1.5;
+  text-align: center;
+  color: var(--secondary-text-color);
 }
 
 .empty-notification-container {
   position: relative;
   width: 100%;
-  min-height: 200px;
+  min-height: 220px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.empty-notification-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 180px;
+  text-align: center;
 }
 
 .comment-loading-trigger {

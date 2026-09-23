@@ -427,8 +427,8 @@
   height: 100%;
   overflow: hidden;
   position: relative;
-  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
-  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background: linear-gradient(180deg, var(--secondary-color) 0%, var(--third-color) 100%);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px), radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
