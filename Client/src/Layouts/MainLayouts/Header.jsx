@@ -46,6 +46,7 @@ function Header({ className, hideOnMobile = false }) {
   const isSearchPage = location.pathname.startsWith("/search");
 
   const isDirectSettingsPage = /^\/settings(\/.*)?$/.test(location.pathname);
+  const isDirectNotificationPage = /^\/notifications(\/.*)?$/.test(location.pathname);
   const isDirectSearchPage = /^\/search(\/.*)?$/.test(location.pathname);
   const isExploreSharedPage =
     /^\/explore\/(post|video)\/[^/]+$/.test(location.pathname) &&
@@ -225,7 +226,7 @@ function Header({ className, hideOnMobile = false }) {
   return (
     <>
       <header className={headerClasses}>
-        {((isDirectSettingsPage || isDirectSearchPage) && windowWidth <= 1000) || isExploreSharedPage ? (
+        {((isDirectSettingsPage || isDirectNotificationPage || isDirectSearchPage) && windowWidth <= 1000) || isExploreSharedPage ? (
           <>
             <ArrowLeft
               size={30}
@@ -247,7 +248,7 @@ function Header({ className, hideOnMobile = false }) {
         ) : (
           <h1>AYS</h1>
         )}
-        {!((isDirectSettingsPage || isDirectSearchPage) && windowWidth <= 1000) && !isExploreSharedPage && (
+        {!((isDirectSettingsPage || isDirectNotificationPage || isDirectSearchPage) && windowWidth <= 1000) && !isExploreSharedPage && (
           <div className="inputContainer" ref={searchContainerRef}>
             <MagnifyingGlass size={20} className="i" />
             <input
@@ -269,7 +270,7 @@ function Header({ className, hideOnMobile = false }) {
           </div>
         )}
 
-        {!((isDirectSettingsPage || isDirectSearchPage) && windowWidth <= 1000) && !isExploreSharedPage && (
+        {!((isDirectSettingsPage || isDirectNotificationPage || isDirectSearchPage) && windowWidth <= 1000) && !isExploreSharedPage && (
           <nav>
           <MagnifyingGlass
             onMouseEnter={() => setHoveredIcon("search")}
@@ -318,7 +319,7 @@ function Header({ className, hideOnMobile = false }) {
             onClick={() => navigate("/chat")}
           />
 
-          {!isProfilePage && !isDirectSettingsPage && !isDirectSearchPage && (
+          {!isProfilePage && !isDirectSettingsPage && !isDirectNotificationPage && !isDirectSearchPage && (
             <>
               <Bell
                 onMouseEnter={() => setHoveredIcon("bell")}
@@ -354,7 +355,7 @@ function Header({ className, hideOnMobile = false }) {
             </>
           )}
 
-          {(isProfilePage || isDirectSettingsPage || isDirectSearchPage) && (
+          {(isProfilePage || isDirectSettingsPage || isDirectNotificationPage || isDirectSearchPage) && (
             <>
               {isProfilePage && (
                 <List
