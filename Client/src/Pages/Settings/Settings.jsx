@@ -1,5 +1,5 @@
 import "./Settings.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Layouts/MainLayouts/Header";
 import MainSideBar from "../../Layouts/MainLayouts/MainSideBar";
@@ -33,6 +33,16 @@ export default function Settings() {
   const [showFirstModal, setShowFirstModal] = useState(false);
   const [showSecondModal, setShowSecondModal] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1000);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 1000);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const settingsOptions = [
     {
@@ -202,7 +212,7 @@ const handleFinalDelete = async () => {
       />
       <Header />
       <MainSideBar />
-      <BottomNav />
+      {!isMobileView && <BottomNav />}
       <div className="main-layout ">
         <div className="margin-container"></div>
         <div style={{ width: "100%" }}>

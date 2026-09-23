@@ -14,7 +14,7 @@ import Camera from "../../assets/Icons/Camera.png";
 import Video from "../../assets/Icons/Video.png";
 import Bell from "../../assets/Icons/Bell.png";
 import Comment from "../../assets/Icons/Comment.png";
-import { SpinnerGap, UserPlus } from "phosphor-react";
+import { SpinnerGap, UserPlus, CheckCircle } from "phosphor-react";
 import SEO from "../../Utils/SEO";
 
 export default function Notifications() {
@@ -213,13 +213,15 @@ export default function Notifications() {
             <h1>
               {t("Notifications")} <span>{`(${totalNotifications})`}</span>
             </h1>
-            <p
-              onClick={() => {
-                markAllAsRead();
-              }}
+            <button
+              type="button"
+              className="mark-all-read-btn"
+              onClick={markAllAsRead}
+              aria-label={t("Mark all as read")}
             >
-              {t("Mark all as read")}
-            </p>
+              <CheckCircle size={16} weight="fill" />
+              <span>{t("Mark all as read")}</span>
+            </button>
           </div>
 
           {followRequestsCount > 0 && (

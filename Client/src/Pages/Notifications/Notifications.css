@@ -5,21 +5,42 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 
-.notifications-header p {
-  font-size: 15px;
-  font-weight: 500;
+.notifications-header h1 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mark-all-read-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--input-border-color);
+  background: transparent;
   color: var(--primary-color);
+  border-radius: 999px;
+  padding: 8px 12px;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin: 0;
   user-select: none;
+  flex-shrink: 0;
 }
 
-.notifications-header p:hover {
-  color: var(--primary-color-dark);
-  text-decoration: underline;
+.mark-all-read-btn:hover {
+  background: var(--secondary-color);
+  border-color: var(--primary-color);
+}
+
+.mark-all-read-btn span {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .notifications-list {
@@ -130,6 +151,33 @@
 
   .follow-requests-text p {
     font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .notifications-header {
+    padding: 20px 15px;
+    gap: 10px;
+  }
+
+  .notifications-header h1 {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+
+  .notifications-header h1 span {
+    display: none;
+  }
+
+  .mark-all-read-btn {
+    padding: 8px;
+    min-width: 36px;
+    min-height: 36px;
+    border-radius: 50%;
+  }
+
+  .mark-all-read-btn span {
+    display: none;
   }
 }
 
