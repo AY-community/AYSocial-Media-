@@ -21,6 +21,7 @@ export default function Notifications() {
   const { t } = useTranslation();
   const [notifications, setNotifications] = useState([]);
   const [notificationsLoading, setNotificationsLoading] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(window.innerWidth <= 1000);
   const [totalNotifications, setTotalNotifications] = useState(0);
   const [followRequestsCount, setFollowRequestsCount] = useState(0);
   const [showFollowRequestsModal, setShowFollowRequestsModal] = useState(false);
@@ -121,6 +122,15 @@ export default function Notifications() {
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth <= 1000);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     setIsInitialLoad(true);
     setNotifications([]);
     setCurrentPage(1);
@@ -195,7 +205,7 @@ export default function Notifications() {
       />
       <Header />
       <MainSideBar />
-      <BottomNav />
+      {!isMobileView && <BottomNav />}
 
       <FollowRequestsModal
         display={showFollowRequestsModal}
