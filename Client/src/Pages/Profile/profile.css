@@ -279,8 +279,15 @@
 }
 
 @media (max-width: 768px) {
+  .profile-actions {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
   .options-container {
-    position: static;
+    position: relative;
+    margin-left: 0;
+    flex-shrink: 0;
   }
 
   .options-dropdown {
@@ -290,9 +297,9 @@
     transform: translateX(-50%);
     right: auto;
     margin-left: 0;
-    min-width: min(220px, calc(100vw - 32px));
-    width: max-content;
-    max-width: calc(100vw - 32px);
+    width: 180px;
+    min-width: 180px;
+    max-width: calc(100vw - 28px);
   }
 }
 
