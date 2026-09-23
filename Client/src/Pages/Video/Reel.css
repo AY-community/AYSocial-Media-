@@ -8,6 +8,29 @@
   display: flex;
 }
 
+.reel-mobile-back {
+  position: fixed;
+  top: 18px;
+  left: 16px;
+  z-index: 30;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(17, 17, 17, 0.72);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+
+.reel-mobile-back:active {
+  transform: scale(0.96);
+}
+
 /* Reels Container - Vertical Scroll */
 .reels-container {
   height: 100vh;
@@ -244,10 +267,10 @@
 }
 
 .reels-empty-state {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 130px);
+  display: grid;
+  place-items: center;
+  min-height: calc(100vh - 60px);
+  height: 100%;
   width: 100%;
   padding: 32px 20px;
   box-sizing: border-box;
@@ -342,6 +365,11 @@
 
   .reel-item {
     height: calc(100vh - 60px);
+  }
+
+  .reels-empty-state {
+    min-height: calc(100vh - 60px);
+    height: 100%;
   }
 
   .reel-video-wrapper {

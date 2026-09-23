@@ -19,7 +19,8 @@ import {
   SpeakerSlash,
   Play,
   Pause,
-  SpinnerGap
+  SpinnerGap,
+  ArrowLeft
 } from 'phosphor-react';
 
 import SEO from "../../Utils/SEO";
@@ -428,8 +429,19 @@ const Reels = () => {
       
       />
       {!isMobile && <Header />}
-      <MainSideBar />
-      <BottomNav />
+      {!isMobile && <MainSideBar />}
+      {!isMobile && <BottomNav />}
+
+      {isMobile && (
+        <button
+          type="button"
+          className="reel-mobile-back"
+          onClick={() => navigate(-1)}
+          aria-label="Go back"
+        >
+          <ArrowLeft size={22} weight="bold" />
+        </button>
+      )}
 
       <div className="reels-layout">
         <div className="margin-container"></div>
